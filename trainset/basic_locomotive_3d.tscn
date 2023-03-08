@@ -1,0 +1,84 @@
+[gd_scene load_steps=14 format=3 uid="uid://b01d076uikggd"]
+
+[ext_resource type="Script" path="res://trainset/basic_loco_3d.gd" id="1_ns076"]
+[ext_resource type="Texture2D" uid="uid://xs0m4s5m3wmr" path="res://icon.svg" id="2_d8d06"]
+[ext_resource type="Script" path="res://trainset/camera_control_3d.gd" id="3_5ssf6"]
+[ext_resource type="AudioStream" uid="uid://cb5w1bdlxlor5" path="res://sounds/EngineSounds/x_ss9_pantot_down.wav" id="4_xliud"]
+[ext_resource type="Script" path="res://trainset/engine_sound_player_3d.gd" id="5_2qfmv"]
+[ext_resource type="AudioStream" uid="uid://b3cfls2eh4bh0" path="res://sounds/EngineSounds/x_ss9_pantot_up.wav" id="6_gj2jm"]
+[ext_resource type="AudioStream" uid="uid://bngh32wxg7epq" path="res://sounds/EngineSounds/WAP4IDLESOUND.tres" id="7_vrb83"]
+[ext_resource type="PackedScene" uid="uid://d0lieygq5lh47" path="res://trainset/coach_sound_player_3d.tscn" id="8_uid85"]
+[ext_resource type="AudioStream" uid="uid://q4ghjtfegn" path="res://sounds/EngineSounds/Wap_Horn2.wav" id="15_lt307"]
+[ext_resource type="Script" path="res://trainset/horn_sound_player_3d.gd" id="16_3dn6t"]
+
+[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_p04yq"]
+load_path = "res://.godot/imported/icon.svg-218a8f2b3041327d8a5756f3a245f83b.s3tc.ctex"
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_jkq6d"]
+albedo_color = Color(0.6, 0.12549, 0, 1)
+albedo_texture = SubResource("CompressedTexture2D_p04yq")
+uv1_scale = Vector3(6, 6, 6)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_bt4sn"]
+albedo_color = Color(0.168627, 0.282353, 0.701961, 1)
+albedo_texture = ExtResource("2_d8d06")
+uv1_scale = Vector3(1, 8, 2.08189e-12)
+
+[node name="BasicLocomotive3D" type="PathFollow3D"]
+transform = Transform3D(-0.998059, -2.90203e-09, -0.0622844, -1.85071e-10, 1, -4.36276e-08, 0.0622844, -4.35314e-08, -0.998059, -916.617, 0.500038, 871.361)
+progress = 6.36098
+v_offset = 0.5
+script = ExtResource("1_ns076")
+offset = 0.001
+
+[node name="MeshInstance3D" type="CSGBox3D" parent="."]
+transform = Transform3D(1, -1.11022e-15, 0, -6.66134e-16, 1, -7.10543e-15, 0, 0, 1, 0, 0.866973, 0)
+size = Vector3(3, 3, 2.5)
+material = SubResource("StandardMaterial3D_jkq6d")
+
+[node name="CSGPolygon3D2" type="CSGPolygon3D" parent="MeshInstance3D"]
+transform = Transform3D(0.999998, 0, -2.23517e-08, 1.11022e-15, 1, 0, 2.23517e-08, 0, 0.999998, 0.0449829, -1.4, 1.30896)
+operation = 2
+polygon = PackedVector2Array(-1.07, -0.07, -1.07, 1.07, 1.07, 1.07, 1.07, -0.07)
+depth = 2.6
+material = SubResource("StandardMaterial3D_bt4sn")
+
+[node name="CameraRig" type="Node3D" parent="MeshInstance3D"]
+transform = Transform3D(-0.756995, 4.91955e-16, 0.653419, 3.48787e-16, 1.00004, -3.48786e-16, -0.653421, -3.61268e-17, -0.756993, -1.93699e-06, 6.64191e-10, 2.04695e-06)
+script = ExtResource("3_5ssf6")
+
+[node name="CameraRotate" type="Node3D" parent="MeshInstance3D/CameraRig"]
+transform = Transform3D(1, -5.32582e-16, 2.96431e-16, 2.96431e-16, 0.849893, 0.526956, -5.32582e-16, -0.526956, 0.849893, 0, 0, 0)
+
+[node name="Camera3D" type="Camera3D" parent="MeshInstance3D/CameraRig/CameraRotate"]
+transform = Transform3D(1, -1.00826e-09, 1.014e-09, -6.57858e-16, 1, -2.16027e-17, -7.12902e-16, -2.16027e-17, 1, 2.08189e-12, 2.08189e-12, 7.5)
+current = true
+far = 200.0
+
+[node name="EngineSoundPlayer3D" type="AudioStreamPlayer3D" parent="."]
+transform = Transform3D(1, 1.11022e-15, 0, 0, 1, -5.68434e-14, 0, -3.55271e-15, 1, 0, 0, 0)
+attenuation_model = 1
+volume_db = -12.24
+max_distance = 12.0
+script = ExtResource("5_2qfmv")
+engine_startup = ExtResource("6_gj2jm")
+engine_shutdown = ExtResource("4_xliud")
+engine_idle = ExtResource("7_vrb83")
+max_pitch = 3.1
+max_tractive_force_allowed = 8.0
+
+[node name="CoachSoundPlayer3D" parent="." instance=ExtResource("8_uid85")]
+transform = Transform3D(1, 1.11022e-15, 0, 0, 1, -5.68434e-14, 0, -3.55271e-15, 1, 0, 0, 0)
+
+[node name="HornSoundPlayer3D" type="AudioStreamPlayer3D" parent="."]
+stream = ExtResource("15_lt307")
+volume_db = -12.24
+script = ExtResource("16_3dn6t")
+horn_stream = ExtResource("15_lt307")
+
+[node name="BellSoundPlayer3D" type="AudioStreamPlayer3D" parent="."]
+stream = ExtResource("15_lt307")
+volume_db = -12.24
+pitch_scale = 1.5
+script = ExtResource("16_3dn6t")
+horn_stream = ExtResource("15_lt307")

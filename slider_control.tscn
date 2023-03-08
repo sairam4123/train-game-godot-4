@@ -1,0 +1,54 @@
+[gd_scene load_steps=5 format=3 uid="uid://bipu6ltfiskoj"]
+
+[ext_resource type="Script" path="res://SliderControl.gd" id="1_vb2l8"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_4e188"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_vdi1q"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_qite0"]
+font_size = 12
+
+[node name="SliderControl" type="PanelContainer"]
+size_flags_horizontal = 3
+script = ExtResource("1_vb2l8")
+
+[node name="MarginContainer" type="MarginContainer" parent="."]
+layout_mode = 2
+theme_override_constants/margin_left = 10
+theme_override_constants/margin_top = 10
+theme_override_constants/margin_right = 10
+theme_override_constants/margin_bottom = 10
+
+[node name="SliderControl" type="VBoxContainer" parent="MarginContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 4
+metadata/_edit_group_ = true
+
+[node name="VSlider" type="VSlider" parent="MarginContainer/SliderControl"]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 3
+theme_override_styles/grabber_area = SubResource("StyleBoxEmpty_4e188")
+theme_override_styles/grabber_area_highlight = SubResource("StyleBoxEmpty_vdi1q")
+min_value = -1.0
+max_value = 1.0
+scrollable = false
+tick_count = 3
+ticks_on_borders = true
+
+[node name="Label" type="Label" parent="MarginContainer/SliderControl"]
+layout_mode = 2
+text = "Reverser"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Value" type="Label" parent="MarginContainer/SliderControl"]
+layout_mode = 2
+text = "Neutral"
+label_settings = SubResource("LabelSettings_qite0")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[connection signal="value_changed" from="MarginContainer/SliderControl/VSlider" to="." method="_on_v_slider_value_changed"]

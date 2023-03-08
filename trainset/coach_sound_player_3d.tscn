@@ -1,0 +1,74 @@
+[gd_scene load_steps=11 format=3 uid="uid://d0lieygq5lh47"]
+
+[ext_resource type="AudioStream" uid="uid://b2qbhwypujlvg" path="res://sounds/CoachSounds/squeal.wav" id="1_5aa2o"]
+[ext_resource type="Script" path="res://trainset/coach_sound_player_3d.gd" id="2_ycg4r"]
+[ext_resource type="AudioStream" uid="uid://bs6ck58r5dodg" path="res://sounds/CoachSounds/SLOW.wav" id="3_u52q0"]
+[ext_resource type="AudioStream" uid="uid://666ffk5wc1c5" path="res://sounds/CoachSounds/SPEEDRESTRICTION.wav" id="4_cppy5"]
+[ext_resource type="AudioStream" uid="uid://bdnniqy671duf" path="res://sounds/CoachSounds/SPEEDAT40.wav" id="5_wxktk"]
+[ext_resource type="AudioStream" uid="uid://c4jl0ir63tpuq" path="res://sounds/CoachSounds/SPEEDAT55.wav" id="6_m32mu"]
+[ext_resource type="AudioStream" uid="uid://dyj5r7ecutdhy" path="res://sounds/CoachSounds/SPEEDAT65.wav" id="7_4csda"]
+[ext_resource type="AudioStream" uid="uid://cpkhdnvaqsnjl" path="res://sounds/CoachSounds/SPEED80TO120.wav" id="8_e3y7n"]
+[ext_resource type="AudioStream" uid="uid://kihhwx7ogxt3" path="res://sounds/CoachSounds/SPEED120TO140.wav" id="9_mdg4v"]
+[ext_resource type="AudioStream" uid="uid://cejj0y53s7qwp" path="res://sounds/CoachSounds/SPEED140TO200.wav" id="10_7g5t0"]
+
+[node name="CoachSoundPlayer3D" type="AudioStreamPlayer3D"]
+stream = ExtResource("1_5aa2o")
+attenuation_model = 1
+volume_db = -24.0
+script = ExtResource("2_ycg4r")
+speed_sounds_dict = {
+Vector2(0.25, 20): NodePath("Slow"),
+Vector2(20, 40): NodePath("SpeedRestriction"),
+Vector2(40, 55): NodePath("SpeedAt40"),
+Vector2(55, 65): NodePath("SpeedAt55"),
+Vector2(65, 80): NodePath("SpeedAt65"),
+Vector2(120, 140): NodePath("Speed120To140"),
+Vector2(140, 200): NodePath("Speed140To200"),
+Vector2i(80, 120): NodePath("Speed80To120")
+}
+squealing_stream = ExtResource("1_5aa2o")
+braking_requirement = -0.001
+
+[node name="Slow" type="AudioStreamPlayer3D" parent="."]
+stream = ExtResource("3_u52q0")
+attenuation_model = 2
+volume_db = -60.0
+
+[node name="SpeedRestriction" type="AudioStreamPlayer3D" parent="."]
+transform = Transform3D(1, 0, -7.45058e-09, 2.22045e-16, 1, 0, 0, 0, 1, 0, 0, 0)
+stream = ExtResource("4_cppy5")
+attenuation_model = 2
+volume_db = -60.0
+
+[node name="SpeedAt40" type="AudioStreamPlayer3D" parent="."]
+transform = Transform3D(1, 0, -7.45058e-09, 2.22045e-16, 1, 0, 0, 0, 1, 0, 0, 0)
+stream = ExtResource("5_wxktk")
+attenuation_model = 2
+volume_db = -60.0
+
+[node name="SpeedAt55" type="AudioStreamPlayer3D" parent="."]
+transform = Transform3D(1, 0, -7.45058e-09, 2.22045e-16, 1, 0, 0, 0, 1, 0, 0, 0)
+stream = ExtResource("6_m32mu")
+attenuation_model = 2
+volume_db = -60.0
+
+[node name="SpeedAt65" type="AudioStreamPlayer3D" parent="."]
+transform = Transform3D(1, 0, -7.45058e-09, 2.22045e-16, 1, 0, 0, 0, 1, 0, 0, 0)
+stream = ExtResource("7_4csda")
+attenuation_model = 2
+volume_db = -60.0
+
+[node name="Speed80To120" type="AudioStreamPlayer3D" parent="."]
+stream = ExtResource("8_e3y7n")
+attenuation_model = 2
+volume_db = -60.0
+
+[node name="Speed120To140" type="AudioStreamPlayer3D" parent="."]
+stream = ExtResource("9_mdg4v")
+attenuation_model = 2
+volume_db = -60.0
+
+[node name="Speed140To200" type="AudioStreamPlayer3D" parent="."]
+stream = ExtResource("10_7g5t0")
+attenuation_model = 2
+volume_db = -60.0

@@ -1,0 +1,18 @@
+[gd_scene load_steps=4 format=3 uid="uid://dpp7ahwhns8ah"]
+
+[ext_resource type="Script" path="res://Starter.gd" id="1_t8vju"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_fk2kg"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_lyc35"]
+
+[node name="Starter" type="HSlider"]
+offset_right = 158.0
+offset_bottom = 16.0
+theme_override_styles/grabber_area = SubResource("StyleBoxEmpty_fk2kg")
+theme_override_styles/grabber_area_highlight = SubResource("StyleBoxEmpty_lyc35")
+max_value = 2.0
+value = 1.0
+script = ExtResource("1_t8vju")
+
+[connection signal="drag_ended" from="." to="." method="_on_drag_ended"]

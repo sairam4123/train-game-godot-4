@@ -1,0 +1,41 @@
+[gd_resource type="AudioBusLayout" load_steps=7 format=3 uid="uid://c00hlvwqmtmvb"]
+
+[sub_resource type="AudioEffectDelay" id="AudioEffectDelay_etd4s"]
+resource_name = "Delay"
+
+[sub_resource type="AudioEffectReverb" id="AudioEffectReverb_bpb15"]
+resource_name = "Reverb"
+
+[sub_resource type="AudioEffectEQ" id="AudioEffectEQ_iy3ea"]
+resource_name = "EQ"
+
+[sub_resource type="AudioEffectReverb" id="AudioEffectReverb_8af2u"]
+resource_name = "Reverb"
+room_size = 0.2
+damping = 0.6
+
+[sub_resource type="AudioEffectDelay" id="AudioEffectDelay_t0juo"]
+resource_name = "Delay"
+
+[sub_resource type="AudioEffectLowPassFilter" id="AudioEffectLowPassFilter_ytion"]
+resource_name = "LowPassFilter"
+
+[resource]
+bus/0/effect/0/effect = SubResource("AudioEffectDelay_etd4s")
+bus/0/effect/0/enabled = false
+bus/0/effect/1/effect = SubResource("AudioEffectReverb_bpb15")
+bus/0/effect/1/enabled = false
+bus/0/effect/2/effect = SubResource("AudioEffectEQ_iy3ea")
+bus/0/effect/2/enabled = true
+bus/1/name = &"Station"
+bus/1/solo = false
+bus/1/mute = false
+bus/1/bypass_fx = false
+bus/1/volume_db = 0.0
+bus/1/send = &"Master"
+bus/1/effect/0/effect = SubResource("AudioEffectReverb_8af2u")
+bus/1/effect/0/enabled = true
+bus/1/effect/1/effect = SubResource("AudioEffectDelay_t0juo")
+bus/1/effect/1/enabled = true
+bus/1/effect/2/effect = SubResource("AudioEffectLowPassFilter_ytion")
+bus/1/effect/2/enabled = true
