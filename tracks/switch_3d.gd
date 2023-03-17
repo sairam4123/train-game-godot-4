@@ -9,12 +9,6 @@ class_name Switch3D
 	set(val):
 		switch = val
 
-@export var current_path: Path3D:
-	get:
-		if invert:
-			return main_path if switch else verging_path
-		return verging_path if switch else main_path
-
 @export var converging: bool = false:
 	get:
 		return converging

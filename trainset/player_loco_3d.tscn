@@ -1,22 +1,15 @@
-[gd_scene load_steps=4 format=3 uid="uid://mlrgx0r6x1cr"]
+[gd_scene load_steps=3 format=3 uid="uid://mlrgx0r6x1cr"]
 
 [ext_resource type="PackedScene" uid="uid://b01d076uikggd" path="res://trainset/basic_locomotive_3d.tscn" id="1_kt1ma"]
 [ext_resource type="Script" path="res://trainset/player_loco_3d.gd" id="2_08snc"]
-
-[sub_resource type="BoxShape3D" id="BoxShape3D_o78kr"]
-size = Vector3(5, 4, 5)
 
 [node name="PlayerLocomotive3D" instance=ExtResource("1_kt1ma")]
 script = ExtResource("2_08snc")
 
 [node name="EngineSoundPlayer3D" parent="." index="1"]
-max_pitch = 2.1
+action_ignition_on = null
+action_ignition_off = null
+action_starter_on = null
 
-[node name="Area3D" type="Area3D" parent="." index="5"]
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Area3D" index="0"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, -7.10543e-15, 1, 0, 0.811052, 0)
-shape = SubResource("BoxShape3D_o78kr")
-
-[connection signal="area_entered" from="Area3D" to="." method="_on_area_3d_area_entered"]
-[connection signal="area_exited" from="Area3D" to="." method="_on_area_3d_area_exited"]
+[node name="BellSoundPlayer3D" parent="." index="4"]
+pitch_scale = 1.2

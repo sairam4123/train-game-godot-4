@@ -1,10 +1,34 @@
-[gd_scene load_steps=14 format=3 uid="uid://dywdat0d4opxi"]
+[gd_scene load_steps=24 format=3 uid="uid://dywdat0d4opxi"]
 
 [ext_resource type="PackedScene" uid="uid://dpp7ahwhns8ah" path="res://Starter.tscn" id="1_qcd38"]
 [ext_resource type="PackedScene" uid="uid://bipu6ltfiskoj" path="res://slider_control.tscn" id="2_1442o"]
 
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_v3dh5"]
+metadata/_preview_in_3d_space_ = true
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_4f3p6"]
+width = 256
+height = 256
+seamless = true
+noise = SubResource("FastNoiseLite_v3dh5")
+
+[sub_resource type="ImageTexture" id="ImageTexture_vjoii"]
+
+[sub_resource type="ImageTexture" id="ImageTexture_ipnfn"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_4cblr"]
+font_size = 12
+
+[sub_resource type="ImageTexture" id="ImageTexture_mt7vu"]
+
+[sub_resource type="ImageTexture" id="ImageTexture_ql1hd"]
+
 [sub_resource type="LabelSettings" id="LabelSettings_r2s03"]
 font_size = 24
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_x46xi"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_21wt7"]
 
 [sub_resource type="InputEventKey" id="InputEventKey_03f2j"]
 keycode = 32
@@ -21,24 +45,17 @@ events = [SubResource("InputEventKey_1e0ob")]
 [sub_resource type="LabelSettings" id="LabelSettings_xg88f"]
 font_size = 12
 
-[sub_resource type="LabelSettings" id="LabelSettings_4cblr"]
-font_size = 12
+[sub_resource type="ImageTexture" id="ImageTexture_twk00"]
 
-[sub_resource type="FastNoiseLite" id="FastNoiseLite_v3dh5"]
-metadata/_preview_in_3d_space_ = true
+[sub_resource type="ImageTexture" id="ImageTexture_qsn2b"]
 
-[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_4f3p6"]
-width = 256
-height = 256
-seamless = true
-noise = SubResource("FastNoiseLite_v3dh5")
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_2b8p5"]
 
-[sub_resource type="InputEventKey" id="InputEventKey_s3rmq"]
-pressed = true
-keycode = 71
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_in01y"]
 
-[sub_resource type="Shortcut" id="Shortcut_4g3da"]
-events = [SubResource("InputEventKey_s3rmq")]
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_yody6"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_urfo5"]
 
 [node name="Control" type="Control"]
 layout_mode = 3
@@ -46,232 +63,6 @@ anchors_preset = 0
 offset_right = 1152.0
 offset_bottom = 648.0
 mouse_filter = 1
-
-[node name="PanelContainer" type="PanelContainer" parent="."]
-layout_mode = 1
-anchors_preset = 3
-anchor_left = 1.0
-anchor_top = 1.0
-anchor_right = 1.0
-anchor_bottom = 1.0
-offset_left = -310.0
-offset_top = -347.0
-grow_horizontal = 0
-grow_vertical = 0
-
-[node name="MarginContainer" type="MarginContainer" parent="PanelContainer"]
-layout_mode = 2
-theme_override_constants/margin_left = 10
-theme_override_constants/margin_top = 10
-theme_override_constants/margin_right = 10
-theme_override_constants/margin_bottom = 10
-metadata/_edit_group_ = true
-
-[node name="VBoxContainer" type="VBoxContainer" parent="PanelContainer/MarginContainer"]
-layout_mode = 2
-
-[node name="Label" type="Label" parent="PanelContainer/MarginContainer/VBoxContainer"]
-layout_mode = 2
-text = "Controls"
-label_settings = SubResource("LabelSettings_r2s03")
-horizontal_alignment = 1
-vertical_alignment = 1
-uppercase = true
-
-[node name="PanelContainer" type="PanelContainer" parent="PanelContainer/MarginContainer/VBoxContainer"]
-layout_mode = 2
-size_flags_horizontal = 3
-
-[node name="MarginContainer" type="MarginContainer" parent="PanelContainer/MarginContainer/VBoxContainer/PanelContainer"]
-layout_mode = 2
-theme_override_constants/margin_top = 10
-theme_override_constants/margin_bottom = 10
-
-[node name="VBoxContainer" type="VBoxContainer" parent="PanelContainer/MarginContainer/VBoxContainer/PanelContainer/MarginContainer"]
-layout_mode = 2
-
-[node name="VBoxContainer" type="VBoxContainer" parent="PanelContainer/MarginContainer/VBoxContainer/PanelContainer/MarginContainer/VBoxContainer"]
-layout_mode = 2
-
-[node name="MarginContainer2" type="MarginContainer" parent="PanelContainer/MarginContainer/VBoxContainer/PanelContainer/MarginContainer/VBoxContainer/VBoxContainer"]
-layout_mode = 2
-theme_override_constants/margin_left = 15
-theme_override_constants/margin_right = 15
-
-[node name="HBoxContainer2" type="HBoxContainer" parent="PanelContainer/MarginContainer/VBoxContainer/PanelContainer/MarginContainer/VBoxContainer/VBoxContainer/MarginContainer2"]
-layout_mode = 2
-
-[node name="Label" type="Label" parent="PanelContainer/MarginContainer/VBoxContainer/PanelContainer/MarginContainer/VBoxContainer/VBoxContainer/MarginContainer2/HBoxContainer2"]
-layout_mode = 2
-text = "Stop"
-horizontal_alignment = 1
-vertical_alignment = 1
-
-[node name="Label2" type="Label" parent="PanelContainer/MarginContainer/VBoxContainer/PanelContainer/MarginContainer/VBoxContainer/VBoxContainer/MarginContainer2/HBoxContainer2"]
-layout_mode = 2
-size_flags_horizontal = 6
-text = "Idle"
-horizontal_alignment = 1
-vertical_alignment = 1
-
-[node name="Label3" type="Label" parent="PanelContainer/MarginContainer/VBoxContainer/PanelContainer/MarginContainer/VBoxContainer/VBoxContainer/MarginContainer2/HBoxContainer2"]
-layout_mode = 2
-text = "Start"
-horizontal_alignment = 1
-vertical_alignment = 1
-
-[node name="MarginContainer" type="MarginContainer" parent="PanelContainer/MarginContainer/VBoxContainer/PanelContainer/MarginContainer/VBoxContainer/VBoxContainer"]
-layout_mode = 2
-size_flags_horizontal = 3
-theme_override_constants/margin_left = 20
-theme_override_constants/margin_right = 20
-
-[node name="Starter" parent="PanelContainer/MarginContainer/VBoxContainer/PanelContainer/MarginContainer/VBoxContainer/VBoxContainer/MarginContainer" instance=ExtResource("1_qcd38")]
-unique_name_in_owner = true
-layout_mode = 2
-
-[node name="HBoxContainer" type="HBoxContainer" parent="PanelContainer/MarginContainer/VBoxContainer/PanelContainer/MarginContainer/VBoxContainer"]
-layout_mode = 2
-
-[node name="MarginContainer2" type="MarginContainer" parent="PanelContainer/MarginContainer/VBoxContainer/PanelContainer/MarginContainer/VBoxContainer/HBoxContainer"]
-layout_mode = 2
-size_flags_horizontal = 3
-theme_override_constants/margin_left = 15
-theme_override_constants/margin_right = 15
-
-[node name="Horn" type="Button" parent="PanelContainer/MarginContainer/VBoxContainer/PanelContainer/MarginContainer/VBoxContainer/HBoxContainer/MarginContainer2"]
-unique_name_in_owner = true
-layout_mode = 2
-shortcut = SubResource("Shortcut_aicli")
-text = "Horn"
-
-[node name="MarginContainer3" type="MarginContainer" parent="PanelContainer/MarginContainer/VBoxContainer/PanelContainer/MarginContainer/VBoxContainer/HBoxContainer"]
-layout_mode = 2
-size_flags_horizontal = 3
-theme_override_constants/margin_left = 15
-theme_override_constants/margin_right = 15
-
-[node name="Bell" type="Button" parent="PanelContainer/MarginContainer/VBoxContainer/PanelContainer/MarginContainer/VBoxContainer/HBoxContainer/MarginContainer3"]
-unique_name_in_owner = true
-layout_mode = 2
-shortcut = SubResource("Shortcut_arllt")
-text = "Bell"
-
-[node name="HBoxContainer" type="HBoxContainer" parent="PanelContainer/MarginContainer/VBoxContainer"]
-layout_mode = 2
-size_flags_vertical = 3
-metadata/_edit_group_ = true
-
-[node name="Reverser" parent="PanelContainer/MarginContainer/VBoxContainer/HBoxContainer" instance=ExtResource("2_1442o")]
-unique_name_in_owner = true
-layout_mode = 2
-range_step = 1.0
-text = "Reverser"
-use_value_enum = true
-value_enum = {
--1: "Reverse",
-0: "Neutral",
-1: "Forward"
-}
-
-[node name="Throttle" parent="PanelContainer/MarginContainer/VBoxContainer/HBoxContainer" instance=ExtResource("2_1442o")]
-unique_name_in_owner = true
-layout_mode = 2
-range_step = null
-text = "Throttle"
-value_format = "%d%%"
-value_enum = {
--1: "Reverse",
-0: "Neutral",
-1: "Forward"
-}
-
-[node name="VSlider" parent="PanelContainer/MarginContainer/VBoxContainer/HBoxContainer/Throttle/MarginContainer/SliderControl" index="0"]
-min_value = 2.08189e-12
-max_value = 100.0
-tick_count = 5
-
-[node name="Label" parent="PanelContainer/MarginContainer/VBoxContainer/HBoxContainer/Throttle/MarginContainer/SliderControl" index="1"]
-text = "Throttle"
-
-[node name="Value" parent="PanelContainer/MarginContainer/VBoxContainer/HBoxContainer/Throttle/MarginContainer/SliderControl" index="2"]
-text = "0%"
-
-[node name="Brake" parent="PanelContainer/MarginContainer/VBoxContainer/HBoxContainer" instance=ExtResource("2_1442o")]
-unique_name_in_owner = true
-layout_mode = 2
-value = 100.0
-range_step = null
-text = "Brake"
-value_format = "%d%%"
-
-[node name="VSlider" parent="PanelContainer/MarginContainer/VBoxContainer/HBoxContainer/Brake/MarginContainer/SliderControl" index="0"]
-min_value = 2.08189e-12
-max_value = 100.0
-value = 100.0
-tick_count = 5
-
-[node name="Label" parent="PanelContainer/MarginContainer/VBoxContainer/HBoxContainer/Brake/MarginContainer/SliderControl" index="1"]
-text = "Brake"
-
-[node name="Value" parent="PanelContainer/MarginContainer/VBoxContainer/HBoxContainer/Brake/MarginContainer/SliderControl" index="2"]
-text = "100%"
-
-[node name="ResConst" parent="PanelContainer/MarginContainer/VBoxContainer/HBoxContainer" instance=ExtResource("2_1442o")]
-unique_name_in_owner = true
-visible = false
-layout_mode = 2
-value = 9.852
-range_step = 0.001
-text = "Resistance 
-Const (Debug)"
-value_format = "%.3f"
-
-[node name="SliderControl" parent="PanelContainer/MarginContainer/VBoxContainer/HBoxContainer/ResConst/MarginContainer" index="0"]
-size_flags_horizontal = 1
-
-[node name="VSlider" parent="PanelContainer/MarginContainer/VBoxContainer/HBoxContainer/ResConst/MarginContainer/SliderControl" index="0"]
-min_value = 2.08189e-12
-max_value = 10.0
-step = 0.001
-value = 9.852
-tick_count = 10
-
-[node name="Label" parent="PanelContainer/MarginContainer/VBoxContainer/HBoxContainer/ResConst/MarginContainer/SliderControl" index="1"]
-text = "Resistance 
-Const (Debug)"
-label_settings = SubResource("LabelSettings_xg88f")
-autowrap_mode = 3
-
-[node name="Value" parent="PanelContainer/MarginContainer/VBoxContainer/HBoxContainer/ResConst/MarginContainer/SliderControl" index="2"]
-text = "9.852"
-
-[node name="PanelContainer2" type="PanelContainer" parent="."]
-layout_mode = 0
-offset_right = 203.0
-offset_bottom = 237.0
-
-[node name="VBoxContainer" type="VBoxContainer" parent="PanelContainer2"]
-layout_mode = 2
-
-[node name="Label" type="Label" parent="PanelContainer2/VBoxContainer"]
-layout_mode = 2
-text = "Debug Menu"
-horizontal_alignment = 1
-vertical_alignment = 1
-uppercase = true
-
-[node name="DebugLabel" type="Label" parent="PanelContainer2/VBoxContainer"]
-unique_name_in_owner = true
-layout_mode = 2
-size_flags_vertical = 3
-label_settings = SubResource("LabelSettings_4cblr")
-
-[node name="DebugLabel2" type="Label" parent="PanelContainer2/VBoxContainer"]
-unique_name_in_owner = true
-layout_mode = 2
-size_flags_vertical = 3
-label_settings = SubResource("LabelSettings_4cblr")
 
 [node name="TextureRect" type="TextureRect" parent="."]
 visible = false
@@ -284,41 +75,415 @@ offset_right = 155.0
 grow_vertical = 0
 texture = SubResource("NoiseTexture2D_4f3p6")
 
-[node name="PanelContainer3" type="PanelContainer" parent="."]
-layout_mode = 1
-anchors_preset = 2
-anchor_top = 1.0
-anchor_bottom = 1.0
-offset_top = -79.0
-offset_right = 112.0
-grow_vertical = 0
+[node name="DebugPanel" type="Window" parent="."]
+title = "DEBUG PANEL"
+position = Vector2i(8, 32)
+size = Vector2i(203, 237)
+content_scale_mode = 2
+theme_override_icons/close = SubResource("ImageTexture_vjoii")
+theme_override_icons/close_pressed = SubResource("ImageTexture_ipnfn")
 
-[node name="MarginContainer" type="MarginContainer" parent="PanelContainer3"]
+[node name="PanelContainer2" type="PanelContainer" parent="DebugPanel"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="VBoxContainer" type="VBoxContainer" parent="DebugPanel/PanelContainer2"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="DebugPanel/PanelContainer2/VBoxContainer"]
+visible = false
+layout_mode = 2
+text = "Debug Menu"
+horizontal_alignment = 1
+vertical_alignment = 1
+uppercase = true
+
+[node name="MarginContainer" type="MarginContainer" parent="DebugPanel/PanelContainer2/VBoxContainer"]
 layout_mode = 2
 theme_override_constants/margin_left = 10
 theme_override_constants/margin_top = 10
 theme_override_constants/margin_right = 10
 theme_override_constants/margin_bottom = 10
 
-[node name="VBoxContainer" type="VBoxContainer" parent="PanelContainer3/MarginContainer"]
+[node name="DebugLabel" type="Label" parent="DebugPanel/PanelContainer2/VBoxContainer/MarginContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_vertical = 3
+label_settings = SubResource("LabelSettings_4cblr")
+
+[node name="MarginContainer2" type="MarginContainer" parent="DebugPanel/PanelContainer2/VBoxContainer"]
+layout_mode = 2
+theme_override_constants/margin_left = 10
+theme_override_constants/margin_top = 10
+theme_override_constants/margin_right = 10
+theme_override_constants/margin_bottom = 10
+
+[node name="DebugLabel2" type="Label" parent="DebugPanel/PanelContainer2/VBoxContainer/MarginContainer2"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_vertical = 3
+label_settings = SubResource("LabelSettings_4cblr")
+
+[node name="Controls" type="Window" parent="."]
+own_world_3d = true
+title = "CONTROLS"
+position = Vector2i(794, 261)
+size = Vector2i(350, 377)
+transient = true
+unresizable = true
+theme_override_icons/close = SubResource("ImageTexture_mt7vu")
+theme_override_icons/close_pressed = SubResource("ImageTexture_ql1hd")
+
+[node name="PanelContainer" type="PanelContainer" parent="Controls"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="MarginContainer" type="MarginContainer" parent="Controls/PanelContainer"]
+layout_mode = 2
+theme_override_constants/margin_left = 10
+theme_override_constants/margin_top = 10
+theme_override_constants/margin_right = 10
+theme_override_constants/margin_bottom = 10
+metadata/_edit_group_ = true
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Controls/PanelContainer/MarginContainer"]
 layout_mode = 2
 
-[node name="Label" type="Label" parent="PanelContainer3/MarginContainer/VBoxContainer"]
+[node name="Label" type="Label" parent="Controls/PanelContainer/MarginContainer/VBoxContainer"]
+visible = false
 layout_mode = 2
-text = "Switch Box"
+text = "Controls"
+label_settings = SubResource("LabelSettings_r2s03")
+horizontal_alignment = 1
+vertical_alignment = 1
+uppercase = true
+
+[node name="PanelContainer" type="PanelContainer" parent="Controls/PanelContainer/MarginContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="MarginContainer" type="MarginContainer" parent="Controls/PanelContainer/MarginContainer/VBoxContainer/PanelContainer"]
+layout_mode = 2
+theme_override_constants/margin_top = 10
+theme_override_constants/margin_bottom = 10
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Controls/PanelContainer/MarginContainer/VBoxContainer/PanelContainer/MarginContainer"]
+layout_mode = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Controls/PanelContainer/MarginContainer/VBoxContainer/PanelContainer/MarginContainer/VBoxContainer"]
+layout_mode = 2
+
+[node name="MarginContainer2" type="MarginContainer" parent="Controls/PanelContainer/MarginContainer/VBoxContainer/PanelContainer/MarginContainer/VBoxContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_constants/margin_left = 15
+theme_override_constants/margin_right = 15
+
+[node name="HBoxContainer" type="HBoxContainer" parent="Controls/PanelContainer/MarginContainer/VBoxContainer/PanelContainer/MarginContainer/VBoxContainer/VBoxContainer/MarginContainer2"]
+layout_mode = 2
+
+[node name="Starter" type="PanelContainer" parent="Controls/PanelContainer/MarginContainer/VBoxContainer/PanelContainer/MarginContainer/VBoxContainer/VBoxContainer/MarginContainer2/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="MarginContainer" type="MarginContainer" parent="Controls/PanelContainer/MarginContainer/VBoxContainer/PanelContainer/MarginContainer/VBoxContainer/VBoxContainer/MarginContainer2/HBoxContainer/Starter"]
+layout_mode = 2
+theme_override_constants/margin_left = 10
+theme_override_constants/margin_top = 10
+theme_override_constants/margin_right = 10
+theme_override_constants/margin_bottom = 10
+
+[node name="VBoxContainer2" type="VBoxContainer" parent="Controls/PanelContainer/MarginContainer/VBoxContainer/PanelContainer/MarginContainer/VBoxContainer/VBoxContainer/MarginContainer2/HBoxContainer/Starter/MarginContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="Label" type="Label" parent="Controls/PanelContainer/MarginContainer/VBoxContainer/PanelContainer/MarginContainer/VBoxContainer/VBoxContainer/MarginContainer2/HBoxContainer/Starter/MarginContainer/VBoxContainer2"]
+layout_mode = 2
+text = "Starter"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Starter" parent="Controls/PanelContainer/MarginContainer/VBoxContainer/PanelContainer/MarginContainer/VBoxContainer/VBoxContainer/MarginContainer2/HBoxContainer/Starter/MarginContainer/VBoxContainer2" instance=ExtResource("1_qcd38")]
+unique_name_in_owner = true
+layout_mode = 2
+
+[node name="HBoxContainer2" type="HBoxContainer" parent="Controls/PanelContainer/MarginContainer/VBoxContainer/PanelContainer/MarginContainer/VBoxContainer/VBoxContainer/MarginContainer2/HBoxContainer/Starter/MarginContainer/VBoxContainer2"]
+layout_mode = 2
+
+[node name="Label3" type="Label" parent="Controls/PanelContainer/MarginContainer/VBoxContainer/PanelContainer/MarginContainer/VBoxContainer/VBoxContainer/MarginContainer2/HBoxContainer/Starter/MarginContainer/VBoxContainer2/HBoxContainer2"]
+layout_mode = 2
+size_flags_horizontal = 0
+text = "Off"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Label2" type="Label" parent="Controls/PanelContainer/MarginContainer/VBoxContainer/PanelContainer/MarginContainer/VBoxContainer/VBoxContainer/MarginContainer2/HBoxContainer/Starter/MarginContainer/VBoxContainer2/HBoxContainer2"]
+layout_mode = 2
+size_flags_horizontal = 10
+text = "On"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Ignition" type="PanelContainer" parent="Controls/PanelContainer/MarginContainer/VBoxContainer/PanelContainer/MarginContainer/VBoxContainer/VBoxContainer/MarginContainer2/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="MarginContainer" type="MarginContainer" parent="Controls/PanelContainer/MarginContainer/VBoxContainer/PanelContainer/MarginContainer/VBoxContainer/VBoxContainer/MarginContainer2/HBoxContainer/Ignition"]
+layout_mode = 2
+theme_override_constants/margin_left = 10
+theme_override_constants/margin_top = 10
+theme_override_constants/margin_right = 10
+theme_override_constants/margin_bottom = 10
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Controls/PanelContainer/MarginContainer/VBoxContainer/PanelContainer/MarginContainer/VBoxContainer/VBoxContainer/MarginContainer2/HBoxContainer/Ignition/MarginContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="Label" type="Label" parent="Controls/PanelContainer/MarginContainer/VBoxContainer/PanelContainer/MarginContainer/VBoxContainer/VBoxContainer/MarginContainer2/HBoxContainer/Ignition/MarginContainer/VBoxContainer"]
+layout_mode = 2
+text = "Pantograph"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Ignition" type="HSlider" parent="Controls/PanelContainer/MarginContainer/VBoxContainer/PanelContainer/MarginContainer/VBoxContainer/VBoxContainer/MarginContainer2/HBoxContainer/Ignition/MarginContainer/VBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_styles/grabber_area = SubResource("StyleBoxEmpty_x46xi")
+theme_override_styles/grabber_area_highlight = SubResource("StyleBoxEmpty_21wt7")
+max_value = 1.0
+
+[node name="HBoxContainer2" type="HBoxContainer" parent="Controls/PanelContainer/MarginContainer/VBoxContainer/PanelContainer/MarginContainer/VBoxContainer/VBoxContainer/MarginContainer2/HBoxContainer/Ignition/MarginContainer/VBoxContainer"]
+layout_mode = 2
+
+[node name="Label3" type="Label" parent="Controls/PanelContainer/MarginContainer/VBoxContainer/PanelContainer/MarginContainer/VBoxContainer/VBoxContainer/MarginContainer2/HBoxContainer/Ignition/MarginContainer/VBoxContainer/HBoxContainer2"]
+layout_mode = 2
+size_flags_horizontal = 0
+text = "Down"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Label2" type="Label" parent="Controls/PanelContainer/MarginContainer/VBoxContainer/PanelContainer/MarginContainer/VBoxContainer/VBoxContainer/MarginContainer2/HBoxContainer/Ignition/MarginContainer/VBoxContainer/HBoxContainer2"]
+layout_mode = 2
+size_flags_horizontal = 10
+text = "Up"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="HBoxContainer" type="HBoxContainer" parent="Controls/PanelContainer/MarginContainer/VBoxContainer/PanelContainer/MarginContainer/VBoxContainer"]
+layout_mode = 2
+
+[node name="MarginContainer2" type="MarginContainer" parent="Controls/PanelContainer/MarginContainer/VBoxContainer/PanelContainer/MarginContainer/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_constants/margin_left = 15
+theme_override_constants/margin_right = 15
+
+[node name="Horn" type="Button" parent="Controls/PanelContainer/MarginContainer/VBoxContainer/PanelContainer/MarginContainer/VBoxContainer/HBoxContainer/MarginContainer2"]
+unique_name_in_owner = true
+layout_mode = 2
+shortcut = SubResource("Shortcut_aicli")
+text = "Horn"
+
+[node name="MarginContainer3" type="MarginContainer" parent="Controls/PanelContainer/MarginContainer/VBoxContainer/PanelContainer/MarginContainer/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_constants/margin_left = 15
+theme_override_constants/margin_right = 15
+
+[node name="Bell" type="Button" parent="Controls/PanelContainer/MarginContainer/VBoxContainer/PanelContainer/MarginContainer/VBoxContainer/HBoxContainer/MarginContainer3"]
+unique_name_in_owner = true
+layout_mode = 2
+shortcut = SubResource("Shortcut_arllt")
+text = "Bell"
+
+[node name="HBoxContainer" type="HBoxContainer" parent="Controls/PanelContainer/MarginContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+metadata/_edit_group_ = true
+
+[node name="Reverser" parent="Controls/PanelContainer/MarginContainer/VBoxContainer/HBoxContainer" instance=ExtResource("2_1442o")]
+unique_name_in_owner = true
+layout_mode = 2
+range_step = 1.0
+text = "Reverser"
+use_value_enum = true
+value_enum = {
+-1: "Reverse",
+0: "Neutral",
+1: "Forward"
+}
+
+[node name="Throttle" parent="Controls/PanelContainer/MarginContainer/VBoxContainer/HBoxContainer" instance=ExtResource("2_1442o")]
+unique_name_in_owner = true
+layout_mode = 2
+range_step = null
+text = "Throttle"
+value_format = "%d%%"
+value_enum = {
+-1: "Reverse",
+0: "Neutral",
+1: "Forward"
+}
+
+[node name="VSlider" parent="Controls/PanelContainer/MarginContainer/VBoxContainer/HBoxContainer/Throttle/MarginContainer/SliderControl" index="0"]
+min_value = 2.08189e-12
+max_value = 100.0
+tick_count = 5
+
+[node name="Label" parent="Controls/PanelContainer/MarginContainer/VBoxContainer/HBoxContainer/Throttle/MarginContainer/SliderControl" index="1"]
+text = "Throttle"
+
+[node name="Value" parent="Controls/PanelContainer/MarginContainer/VBoxContainer/HBoxContainer/Throttle/MarginContainer/SliderControl" index="2"]
+text = "0%"
+
+[node name="Brake" parent="Controls/PanelContainer/MarginContainer/VBoxContainer/HBoxContainer" instance=ExtResource("2_1442o")]
+unique_name_in_owner = true
+layout_mode = 2
+range_step = null
+text = "Brake"
+value_format = "%d%%"
+
+[node name="VSlider" parent="Controls/PanelContainer/MarginContainer/VBoxContainer/HBoxContainer/Brake/MarginContainer/SliderControl" index="0"]
+min_value = 2.08189e-12
+max_value = 100.0
+value = 100.0
+tick_count = 5
+
+[node name="Label" parent="Controls/PanelContainer/MarginContainer/VBoxContainer/HBoxContainer/Brake/MarginContainer/SliderControl" index="1"]
+text = "Brake"
+
+[node name="Value" parent="Controls/PanelContainer/MarginContainer/VBoxContainer/HBoxContainer/Brake/MarginContainer/SliderControl" index="2"]
+text = "100%"
+
+[node name="ResConst" parent="Controls/PanelContainer/MarginContainer/VBoxContainer/HBoxContainer" instance=ExtResource("2_1442o")]
+unique_name_in_owner = true
+visible = false
+layout_mode = 2
+range_step = 0.001
+text = "Resistance 
+Const (Debug)"
+value_format = "%.3f"
+
+[node name="SliderControl" parent="Controls/PanelContainer/MarginContainer/VBoxContainer/HBoxContainer/ResConst/MarginContainer" index="0"]
+size_flags_horizontal = 1
+
+[node name="VSlider" parent="Controls/PanelContainer/MarginContainer/VBoxContainer/HBoxContainer/ResConst/MarginContainer/SliderControl" index="0"]
+min_value = 2.08189e-12
+max_value = 10.0
+step = 0.001
+value = 9.852
+tick_count = 10
+
+[node name="Label" parent="Controls/PanelContainer/MarginContainer/VBoxContainer/HBoxContainer/ResConst/MarginContainer/SliderControl" index="1"]
+text = "Resistance 
+Const (Debug)"
+label_settings = SubResource("LabelSettings_xg88f")
+autowrap_mode = 3
+
+[node name="Value" parent="Controls/PanelContainer/MarginContainer/VBoxContainer/HBoxContainer/ResConst/MarginContainer/SliderControl" index="2"]
+text = "9.852"
+
+[node name="SwitchBox" type="Window" parent="."]
+title = "SWITCH BOX"
+position = Vector2i(8, 548)
+size = Vector2i(220, 100)
+extend_to_title = true
+theme_override_icons/close = SubResource("ImageTexture_twk00")
+theme_override_icons/close_pressed = SubResource("ImageTexture_qsn2b")
+
+[node name="PanelContainer3" type="PanelContainer" parent="SwitchBox"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="MarginContainer" type="MarginContainer" parent="SwitchBox/PanelContainer3"]
+layout_mode = 2
+theme_override_constants/margin_left = 10
+theme_override_constants/margin_top = 10
+theme_override_constants/margin_right = 10
+theme_override_constants/margin_bottom = 10
+
+[node name="HBoxContainer" type="HBoxContainer" parent="SwitchBox/PanelContainer3/MarginContainer"]
+layout_mode = 2
+theme_override_constants/separation = 16
+alignment = 1
+
+[node name="VBoxContainer" type="VBoxContainer" parent="SwitchBox/PanelContainer3/MarginContainer/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+alignment = 1
+
+[node name="Label" type="Label" parent="SwitchBox/PanelContainer3/MarginContainer/HBoxContainer/VBoxContainer"]
+layout_mode = 2
+text = "Forward"
 horizontal_alignment = 1
 vertical_alignment = 2
 
-[node name="Switch" type="Button" parent="PanelContainer3/MarginContainer/VBoxContainer"]
+[node name="ForwardSwitch" type="HSlider" parent="SwitchBox/PanelContainer3/MarginContainer/HBoxContainer/VBoxContainer"]
 unique_name_in_owner = true
-custom_minimum_size = Vector2(0, 50)
 layout_mode = 2
-size_flags_vertical = 4
-disabled = true
-shortcut = SubResource("Shortcut_4g3da")
-text = "Switch!"
+theme_override_styles/grabber_area = SubResource("StyleBoxEmpty_2b8p5")
+theme_override_styles/grabber_area_highlight = SubResource("StyleBoxEmpty_in01y")
+max_value = 1.0
 
-[editable path="PanelContainer/MarginContainer/VBoxContainer/HBoxContainer/Reverser"]
-[editable path="PanelContainer/MarginContainer/VBoxContainer/HBoxContainer/Throttle"]
-[editable path="PanelContainer/MarginContainer/VBoxContainer/HBoxContainer/Brake"]
-[editable path="PanelContainer/MarginContainer/VBoxContainer/HBoxContainer/ResConst"]
+[node name="HBoxContainer" type="HBoxContainer" parent="SwitchBox/PanelContainer3/MarginContainer/HBoxContainer/VBoxContainer"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="SwitchBox/PanelContainer3/MarginContainer/HBoxContainer/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+text = "M"
+
+[node name="Label2" type="Label" parent="SwitchBox/PanelContainer3/MarginContainer/HBoxContainer/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 10
+text = "V"
+
+[node name="VSeparator" type="VSeparator" parent="SwitchBox/PanelContainer3/MarginContainer/HBoxContainer"]
+layout_mode = 2
+theme_override_constants/separation = 1
+
+[node name="VBoxContainer2" type="VBoxContainer" parent="SwitchBox/PanelContainer3/MarginContainer/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+alignment = 1
+
+[node name="Label" type="Label" parent="SwitchBox/PanelContainer3/MarginContainer/HBoxContainer/VBoxContainer2"]
+layout_mode = 2
+text = "Backward"
+horizontal_alignment = 1
+vertical_alignment = 2
+
+[node name="BackwardSwitch" type="HSlider" parent="SwitchBox/PanelContainer3/MarginContainer/HBoxContainer/VBoxContainer2"]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_styles/grabber_area = SubResource("StyleBoxEmpty_yody6")
+theme_override_styles/grabber_area_highlight = SubResource("StyleBoxEmpty_urfo5")
+max_value = 1.0
+
+[node name="HBoxContainer" type="HBoxContainer" parent="SwitchBox/PanelContainer3/MarginContainer/HBoxContainer/VBoxContainer2"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="SwitchBox/PanelContainer3/MarginContainer/HBoxContainer/VBoxContainer2/HBoxContainer"]
+layout_mode = 2
+text = "M"
+
+[node name="Label2" type="Label" parent="SwitchBox/PanelContainer3/MarginContainer/HBoxContainer/VBoxContainer2/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 10
+text = "V"
+
+[editable path="Controls/PanelContainer/MarginContainer/VBoxContainer/HBoxContainer/Reverser"]
+[editable path="Controls/PanelContainer/MarginContainer/VBoxContainer/HBoxContainer/Throttle"]
+[editable path="Controls/PanelContainer/MarginContainer/VBoxContainer/HBoxContainer/Brake"]
+[editable path="Controls/PanelContainer/MarginContainer/VBoxContainer/HBoxContainer/ResConst"]

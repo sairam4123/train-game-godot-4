@@ -1,9 +1,10 @@
-[gd_scene load_steps=8 format=3 uid="uid://drsr4nhoggbsh"]
+[gd_scene load_steps=9 format=3 uid="uid://drsr4nhoggbsh"]
 
 [ext_resource type="Script" path="res://trainset/basic_coach_3d.gd" id="1_6hneq"]
 [ext_resource type="Texture2D" uid="uid://xs0m4s5m3wmr" path="res://icon.svg" id="2_ay6ph"]
 [ext_resource type="Script" path="res://trainset/camera_control_3d.gd" id="3_eey16"]
 [ext_resource type="PackedScene" uid="uid://d0lieygq5lh47" path="res://trainset/coach_sound_player_3d.tscn" id="4_76do2"]
+[ext_resource type="PackedScene" uid="uid://dtlnooi7b5iw1" path="res://trainset/switcher_3d.tscn" id="5_3morr"]
 
 [sub_resource type="CompressedTexture2D" id="CompressedTexture2D_p04yq"]
 load_path = "res://.godot/imported/icon.svg-218a8f2b3041327d8a5756f3a245f83b.s3tc.ctex"
@@ -50,4 +51,7 @@ current = true
 far = 200.0
 
 [node name="CoachSoundPlayer3D" parent="." instance=ExtResource("4_76do2")]
-max_distance = 3.0
+volume_db = -12.24
+max_distance = 25.0
+
+[node name="Switcher3D" parent="." instance=ExtResource("5_3morr")]

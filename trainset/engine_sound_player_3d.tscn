@@ -1,0 +1,34 @@
+[gd_scene load_steps=7 format=3 uid="uid://tnagonolfmea"]
+
+[ext_resource type="Script" path="res://trainset/engine_sound_player_3d.gd" id="1_34dn7"]
+[ext_resource type="Script" path="res://trainset/panto_sound_player_3d.gd" id="2_j3vob"]
+[ext_resource type="AudioStream" uid="uid://b3cfls2eh4bh0" path="res://sounds/EngineSounds/x_ss9_pantot_up.wav" id="3_lkgrj"]
+[ext_resource type="AudioStream" uid="uid://cb5w1bdlxlor5" path="res://sounds/EngineSounds/x_ss9_pantot_down.wav" id="4_ml2d1"]
+[ext_resource type="AudioStream" uid="uid://bngh32wxg7epq" path="res://sounds/EngineSounds/WAP4IDLESOUND.tres" id="5_mp5oi"]
+[ext_resource type="Script" path="res://trainset/idle_sound_player_3d.gd" id="5_tjbnd"]
+
+[node name="EngineSoundPlayer3D" type="Node3D"]
+script = ExtResource("1_34dn7")
+__current_throttle = null
+
+[node name="PantoSoundPlayer3D" type="AudioStreamPlayer3D" parent="."]
+stream = ExtResource("4_ml2d1")
+attenuation_model = 1
+volume_db = -12.24
+script = ExtResource("2_j3vob")
+panto_up = ExtResource("3_lkgrj")
+panto_down = ExtResource("4_ml2d1")
+
+[node name="IdleSoundPlayer3D" type="AudioStreamPlayer3D" parent="."]
+stream = ExtResource("5_mp5oi")
+attenuation_model = 1
+volume_db = -23.937
+pitch_scale = 0.01
+stream_paused = true
+script = ExtResource("5_tjbnd")
+
+[connection signal="finished" from="PantoSoundPlayer3D" to="PantoSoundPlayer3D" method="_on_finished"]
+[connection signal="panto_down_initialized" from="PantoSoundPlayer3D" to="." method="_on_panto_sound_player_3d_panto_down_initialized"]
+[connection signal="panto_up_finalized" from="PantoSoundPlayer3D" to="." method="_on_panto_sound_player_3d_panto_up_finalized"]
+[connection signal="engine_shut_down" from="IdleSoundPlayer3D" to="." method="_on_idle_sound_player_3d_engine_shut_down"]
+[connection signal="engine_started_up" from="IdleSoundPlayer3D" to="." method="_on_idle_sound_player_3d_engine_started_up"]

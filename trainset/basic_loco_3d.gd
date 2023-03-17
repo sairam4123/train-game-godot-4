@@ -13,11 +13,6 @@ var rev: int = 1
 var velocity = 0
 var brake = 0
 
-enum StarterState {
-	STOP = 0,
-	DEFAULT = 1,
-	START = 2
-}
 @export var power_output = 10000.0
 @export var throttle_efficiency = 0.89
 @export var brake_efficiency = 0.78
@@ -35,9 +30,19 @@ var tractive_force
 		progress_ratio = offset
 var real_offset = 0
 
-var starter: StarterState = StarterState.DEFAULT:
+enum PowerMode {
+	starter = 0,
+	ignition = 1
+}
+var starter: bool = false:
 	set(value):
-		starter_state_changed(value)
+		starter = value
+		power_state_changed(starter, PowerMode.starter)
+
+var ignition: bool = false:
+	set(value):
+		ignition = value
+		power_state_changed(ignition, PowerMode.ignition)
 
 var honking = false:
 	set(value):
@@ -74,14 +79,27 @@ func _ready():
 func _power_state_changed(power_state):
 	is_powered = power_state
 
-func starter_state_changed(starter_state):
-	match starter_state:
-		StarterState.START:
-			$EngineSoundPlayer3D.action_engine_start = true
-		StarterState.STOP:
-			$EngineSoundPlayer3D.action_engine_stop = true
-		StarterState.DEFAULT:
-			return
+func power_state_changed(changed_value, power_mode):
+	match power_mode:
+		PowerMode.ignition:
+			if changed_value:
+				$EngineSoundPlayer3D.action_panto_up = true
+				$Pantograph.is_up = true
+			if not changed_value:
+				$EngineSoundPlayer3D.action_panto_down = true
+				$Pantograph.is_up = false
+		PowerMode.starter:
+			if ignition and changed_value:
+				$EngineSoundPlayer3D.action_start_engine = true
+			if not changed_value:
+				return
+#	match starter_state:
+#		StarterState.START:
+#			$EngineSoundPlayer3D.action_engine_start = true
+#		StarterState.STOP:
+#			$EngineSoundPlayer3D.action_engine_stop = true
+#		StarterState.DEFAULT:
+#			return
 		
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
@@ -98,8 +116,8 @@ func _physics_process(delta):
 	velocity = snappedf(velocity, 0.0001)
 	debug_label.text = ""
 	debug_label.text += "FPS: %s\n" % Engine.get_frames_per_second()
-	debug_label.text += "Speed (in m/s): %.2f m/s\n" % abs(velocity)
 	debug_label.text += "Speed (in km/h): %.2f km/h\n" % abs(velocity * 3.6)
+	debug_label.text += "Speed (in m/s): %.2f m/s\n" % abs(velocity)
 	var calculated_res_const = 0.5 * frontal_area * 0.5 * 1.29
 	debug_label.text += "Aerodynamic Drag Constant: %.2f\n" % (calculated_res_const)
 	var tractive_effort = throttle * power_output * throttle_efficiency * int(is_powered)
@@ -108,12 +126,12 @@ func _physics_process(delta):
 	var brake_force = (-brake * sign(velocity) * sqrt(abs(velocity)) * brake_efficiency * brake_friction)
 	var grade = grade_texture.get_noise_2d(position.x, position.z)
 	grade = remap(grade, -1, 1, -0.01, 0.01)
-	var grade_resistance = (mass * -9.81 * sin(grade))
+	var grade_resistance = ((mass) * -9.81 * sin(grade))
 	
 	debug_label.text += "Grade Resistance (in kN): %.2f kN\n" % (grade_resistance / 1000)
 	total_force = engine_force + (resistive_force + grade_resistance) + brake_force
 	tractive_force = clampf(abs(tractive_effort) - abs(resistive_force), 0, INF)
-	var acc = total_force/mass
+	var acc = total_force/(mass)
 	debug_label.text += "Total Force (in kN): %.2f kN\n" % (total_force / 1000)
 	debug_label.text += "Tractive Force (in kN): %.2f kN\n" % (engine_force / 1000)
 	debug_label.text += "Tractive Effort (in kN): %.2f kN\n" % (tractive_effort / 1000)
@@ -137,26 +155,6 @@ func _physics_process(delta):
 #	real_offset += (offset-real_offset)
 	
 #
-func _input(event: InputEvent):
-	if event is InputEventKey:
-		if event.keycode == KEY_W and event.pressed:
-			rev += 1
-			rev = clampi(rev, -1, 1)
-		elif event.keycode == KEY_S and event.pressed:
-			rev -= 1
-			rev = clampi(rev, -1, 1)
-		if event.keycode == KEY_D and event.pressed:
-			throttle += 1/100.0
-		elif event.keycode == KEY_A and event.pressed:
-			throttle -= 1/100.0
-		if event.keycode == KEY_APOSTROPHE and event.pressed:
-			brake += 1/100.0
-		elif event.keycode == KEY_SEMICOLON and event.pressed:
-			brake -= 1/100.0
-		var debug_layout = UIAccessor.ui_node
-		debug_layout.get_node("%Reverser").value = rev
-		debug_layout.get_node("%Throttle").value = throttle * 100
-		debug_layout.get_node("%Brake").value = brake * 100
 	
 
 # RES_CONST = -0.4257, 12.8

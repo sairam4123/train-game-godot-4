@@ -1,0 +1,19 @@
+[gd_scene load_steps=3 format=3 uid="uid://dtlnooi7b5iw1"]
+
+[ext_resource type="Script" path="res://trainset/switcher_3d.gd" id="1_qvajq"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_8mjlb"]
+size = Vector3(5, 4, 5)
+
+[node name="Switcher3D" type="Node3D"]
+script = ExtResource("1_qvajq")
+
+[node name="Area3D" type="Area3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, -3.55271e-15, 1, 0, 0, 0)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Area3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, -7.10543e-15, 1, 0, 0.811052, 0)
+shape = SubResource("BoxShape3D_8mjlb")
+
+[connection signal="area_entered" from="Area3D" to="." method="_on_area_3d_area_entered"]
+[connection signal="area_exited" from="Area3D" to="." method="_on_area_3d_area_exited"]

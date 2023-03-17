@@ -22,7 +22,7 @@ Vector2(20, 40): NodePath("SpeedRestriction"),
 Vector2(40, 55): NodePath("SpeedAt40"),
 Vector2(55, 65): NodePath("SpeedAt55"),
 Vector2(65, 80): NodePath("SpeedAt65"),
-Vector2(120, 140): NodePath("Speed120To140"),
+Vector2(120, 140): null,
 Vector2(140, 200): NodePath("Speed140To200"),
 Vector2i(80, 120): NodePath("Speed80To120")
 }
@@ -71,4 +71,3 @@ volume_db = -60.0
 [node name="Speed140To200" type="AudioStreamPlayer3D" parent="."]
 stream = ExtResource("10_7g5t0")
 attenuation_model = 2
-volume_db = -60.0

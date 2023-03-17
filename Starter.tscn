@@ -11,8 +11,9 @@ offset_right = 158.0
 offset_bottom = 16.0
 theme_override_styles/grabber_area = SubResource("StyleBoxEmpty_fk2kg")
 theme_override_styles/grabber_area_highlight = SubResource("StyleBoxEmpty_lyc35")
-max_value = 2.0
-value = 1.0
+max_value = 1.0
 script = ExtResource("1_t8vju")
+default_value = 0.0
 
 [connection signal="drag_ended" from="." to="." method="_on_drag_ended"]
+[connection signal="drag_started" from="." to="." method="_on_drag_started"]

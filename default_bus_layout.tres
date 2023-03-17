@@ -1,4 +1,4 @@
-[gd_resource type="AudioBusLayout" load_steps=7 format=3 uid="uid://c00hlvwqmtmvb"]
+[gd_resource type="AudioBusLayout" load_steps=8 format=3 uid="uid://c00hlvwqmtmvb"]
 
 [sub_resource type="AudioEffectDelay" id="AudioEffectDelay_etd4s"]
 resource_name = "Delay"
@@ -20,6 +20,10 @@ resource_name = "Delay"
 [sub_resource type="AudioEffectLowPassFilter" id="AudioEffectLowPassFilter_ytion"]
 resource_name = "LowPassFilter"
 
+[sub_resource type="AudioEffectPitchShift" id="AudioEffectPitchShift_h22no"]
+resource_name = "PitchShift"
+pitch_scale = 1.5
+
 [resource]
 bus/0/effect/0/effect = SubResource("AudioEffectDelay_etd4s")
 bus/0/effect/0/enabled = false
@@ -39,3 +43,11 @@ bus/1/effect/1/effect = SubResource("AudioEffectDelay_t0juo")
 bus/1/effect/1/enabled = true
 bus/1/effect/2/effect = SubResource("AudioEffectLowPassFilter_ytion")
 bus/1/effect/2/enabled = true
+bus/2/name = &"BellSound"
+bus/2/solo = false
+bus/2/mute = false
+bus/2/bypass_fx = false
+bus/2/volume_db = 0.0
+bus/2/send = &"BellSound 2"
+bus/2/effect/0/effect = SubResource("AudioEffectPitchShift_h22no")
+bus/2/effect/0/enabled = true

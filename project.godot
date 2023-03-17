@@ -22,7 +22,6 @@ UIAccessor="*res://ui_accessors.gd"
 [display]
 
 window/vsync/vsync_mode=0
-window/stretch/mode="canvas_items"
 window/stretch/aspect="ignore"
 
 [layer_names]
