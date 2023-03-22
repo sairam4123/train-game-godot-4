@@ -7,6 +7,8 @@ class_name BasicCoach3D
 		offset = value
 		progress_ratio = offset
 
+@export var mass: float = 1000
+
 @export var engine: PathFollow3D:
 	set(value):
 		engine = value
@@ -20,11 +22,6 @@ var brake = 0:
 	get:
 		if is_inside_tree():
 			return engine.brake
-
-
-func _ready():
-	pass # Replace with function body.
-
 
 func _physics_process(delta):
 	if Engine.is_editor_hint():

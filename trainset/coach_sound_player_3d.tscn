@@ -69,5 +69,6 @@ attenuation_model = 2
 volume_db = -60.0
 
 [node name="Speed140To200" type="AudioStreamPlayer3D" parent="."]
+visible = false
 stream = ExtResource("10_7g5t0")
 attenuation_model = 2

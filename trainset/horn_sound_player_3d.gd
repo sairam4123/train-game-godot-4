@@ -1,7 +1,10 @@
 @tool
 extends AudioStreamPlayer3D
 
-var engine
+signal honked_for(time)
+
+var engine: BasicLocomotive3D
+var start_time = 0
 
 @export var loop_start = 0.16
 @export var loop_horn_continuous_detection = 3.34
@@ -13,15 +16,18 @@ var engine
 		if value:
 			stream = horn_stream
 			play()
+			start_time = int(Time.get_unix_time_from_system())
 		elif !value:
 			stop()
 			play(loop_end)
+			var current_time = int(Time.get_unix_time_from_system())
+			honked_for.emit(current_time-start_time)
 		honking = value
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	engine = get_parent()
-	if not engine is PathFollow3D:
+	if not engine is BasicLocomotive3D:
 		push_error("Parent should be engine!")
 		engine = null
 

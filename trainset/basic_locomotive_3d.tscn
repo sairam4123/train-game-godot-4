@@ -1,4 +1,4 @@
-[gd_scene load_steps=14 format=3 uid="uid://b01d076uikggd"]
+[gd_scene load_steps=15 format=3 uid="uid://b01d076uikggd"]
 
 [ext_resource type="Script" path="res://trainset/basic_loco_3d.gd" id="1_ns076"]
 [ext_resource type="Texture2D" uid="uid://xs0m4s5m3wmr" path="res://icon.svg" id="2_d8d06"]
@@ -7,6 +7,7 @@
 [ext_resource type="PackedScene" uid="uid://dtlnooi7b5iw1" path="res://trainset/switcher_3d.tscn" id="8_4egab"]
 [ext_resource type="PackedScene" uid="uid://d0lieygq5lh47" path="res://trainset/coach_sound_player_3d.tscn" id="8_uid85"]
 [ext_resource type="Script" path="res://trainset/pantograph_3d.gd" id="9_10l6e"]
+[ext_resource type="Script" path="res://trainset/EnginePhysics3D.gd" id="10_thbfx"]
 [ext_resource type="AudioStream" uid="uid://q4ghjtfegn" path="res://sounds/EngineSounds/Wap_Horn2.wav" id="15_lt307"]
 [ext_resource type="Script" path="res://trainset/horn_sound_player_3d.gd" id="16_3dn6t"]
 
@@ -16,7 +17,7 @@ load_path = "res://.godot/imported/icon.svg-218a8f2b3041327d8a5756f3a245f83b.s3t
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_jkq6d"]
 albedo_color = Color(0.6, 0.12549, 0, 1)
 albedo_texture = SubResource("CompressedTexture2D_p04yq")
-uv1_scale = Vector3(6, 6, 6)
+uv1_scale = Vector3(20, 15, 15)
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_bt4sn"]
 albedo_color = Color(0.168627, 0.282353, 0.701961, 1)
@@ -41,10 +42,10 @@ size = Vector3(3, 3, 2.5)
 material = SubResource("StandardMaterial3D_jkq6d")
 
 [node name="CSGPolygon3D2" type="CSGPolygon3D" parent="MeshInstance3D"]
-transform = Transform3D(0.999998, 0, -2.23517e-08, 1.11022e-15, 1, 0, 2.23517e-08, 0, 0.999998, 0.0449829, -1.4, 1.30896)
+transform = Transform3D(0.999998, 0, -2.23517e-08, 1.11022e-15, 1, 0, 2.23517e-08, -1.42109e-14, 0.999998, 0.0447998, -1.4, 1.77283)
 operation = 2
 polygon = PackedVector2Array(-1.07, -0.07, -1.07, 1.07, 1.07, 1.07, 1.07, -0.07)
-depth = 2.6
+depth = 3.3
 material = SubResource("StandardMaterial3D_bt4sn")
 
 [node name="CameraRig" type="Node3D" parent="MeshInstance3D"]
@@ -61,7 +62,6 @@ far = 200.0
 
 [node name="EngineSoundPlayer3D" parent="." instance=ExtResource("4_on03t")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, -3.55271e-15, 1, 0, 0, 0)
-__current_throttle = 0.0
 
 [node name="CoachSoundPlayer3D" parent="." instance=ExtResource("8_uid85")]
 transform = Transform3D(1, 1.11022e-15, 0, 0, 1, -5.68434e-14, 0, -3.55271e-15, 1, 0, 0, 0)
@@ -88,3 +88,9 @@ mesh = SubResource("CylinderMesh_3slqo")
 script = ExtResource("9_10l6e")
 up_duration = 6.35
 down_duration = 4.62
+
+[node name="EnginePhysics3D" type="Node3D" parent="."]
+script = ExtResource("10_thbfx")
+
+[connection signal="honked_for" from="HornSoundPlayer3D" to="." method="_on_horn_sound_player_3d_honked_for"]
+[connection signal="honked_for" from="BellSoundPlayer3D" to="." method="_on_bell_sound_player_3d_honked_for"]

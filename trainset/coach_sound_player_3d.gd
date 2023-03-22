@@ -24,8 +24,7 @@ func _physics_process(delta):
 		return
 	var speed = abs(coach.velocity) * 3.6 # convert into kmph
 	var debug_layout = UIAccessor.ui_node
-	debug_layout.get_node("%DebugLabel2").text = ""
-	debug_layout.get_node("%DebugLabel2").text += "Del Speed (in m): %.5f m" % (speed - prev_speed)
+	DebugPrint.add_text(name +" Del Speed (in m): %.5f m\n" % (speed - prev_speed))
 	if ((speed - prev_speed) < (braking_requirement)) and not is_zero_approx(coach.brake):
 		if not playing:
 			play()
@@ -40,7 +39,8 @@ func _physics_process(delta):
 		
 		UIAccessor.play_audio_crossfade_apn(current_apn, new_apn, (func crossfade_callback(apn):
 			print("Callback called!")
-			if apn:
+			prints(current_apn, new_apn, apn)
+			if apn and (not apn == current_apn):
 				apn.stop()
 		).bind(current_apn))
 		current_apn = new_apn
@@ -57,6 +57,9 @@ func get_audio_for_speed(speed: float):
 	for speed_vec in speed_keys:
 		if speed_vec.x < speed and speed < speed_vec.y:
 			var audio = speed_sounds_dict[speed_vec]
-			return get_node(audio)
+			if audio:
+				return get_node(audio)
+			else:
+				return current_apn
 	return current_apn
 			

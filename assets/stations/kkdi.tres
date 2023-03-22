@@ -1,0 +1,10 @@
+[gd_resource type="Resource" script_class="StationInfo" load_steps=2 format=3 uid="uid://koay3ouxi1g2"]
+
+[ext_resource type="Script" path="res://station_system/station_info.gd" id="1_cxhwv"]
+
+[resource]
+script = ExtResource("1_cxhwv")
+name = "Karaikudi"
+code = "KKDI"
+type = 1
+platform = 7

@@ -1,4 +1,4 @@
-[gd_scene load_steps=26 format=3 uid="uid://e7hewu3kdxyi"]
+[gd_scene load_steps=31 format=3 uid="uid://dlwgp207x3qa4"]
 
 [ext_resource type="PackedScene" uid="uid://dywdat0d4opxi" path="res://debug_layout.tscn" id="1_8nmgb"]
 [ext_resource type="Texture2D" uid="uid://xs0m4s5m3wmr" path="res://icon.svg" id="1_pw4nt"]
@@ -6,9 +6,14 @@
 [ext_resource type="Script" path="res://tracks/rail_track_3d.gd" id="2_l05eq"]
 [ext_resource type="PackedScene" uid="uid://drsr4nhoggbsh" path="res://trainset/basic_coach_3d.tscn" id="4_r5d62"]
 [ext_resource type="Script" path="res://station_system/station_3d.gd" id="6_o2t5b"]
+[ext_resource type="Resource" uid="uid://koay3ouxi1g2" path="res://assets/stations/kkdi.tres" id="7_16e6e"]
 [ext_resource type="AudioStream" uid="uid://cxofs32c0d5te" path="res://sounds/TrainAnnouncements/mas_ann.mp3" id="7_rmb51"]
+[ext_resource type="Resource" uid="uid://c3psmfhaydbil" path="res://assets/stations/tpj.tres" id="9_2bhpr"]
 [ext_resource type="Script" path="res://switches/switch_handler_3d.gd" id="9_8ly3f"]
 [ext_resource type="Script" path="res://tracks/switch_3d.gd" id="9_mxc50"]
+[ext_resource type="Script" path="res://consist_system/train_3d.gd" id="10_67wm0"]
+[ext_resource type="Resource" uid="uid://5xjarxrfar6t" path="res://assets/stations/pdkt.tres" id="10_vplqq"]
+[ext_resource type="Resource" uid="uid://b3tyjyj6in64m" path="res://assets/trains/12606.tres" id="13_o2n2l"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_hoiqj"]
 sky_horizon_color = Color(0.64625, 0.65575, 0.67075, 1)
@@ -79,10 +84,10 @@ size = Vector3(15.389, 10.957, 21.853)
 
 [sub_resource type="Curve3D" id="Curve3D_vwhxd"]
 _data = {
-"points": PackedVector3Array(0, 0, 0, 0, 0, 0, 211.9, 0, 143, 0, 0, 0, 0, 0, 0, 224.7, 0, 143.2, -4.92807, 0, -0.0260773, 4.92807, 0, 0.0260773, 243, 0, 143.7, -2.76779, 0, -1.29846, 2.76779, 0, 1.29846, 262.827, 7.62939e-06, 149.918, -2.72363, 0, -1.57666, 2.72363, 0, 1.57666, 270.286, 7.62939e-06, 154.404, -0.737671, 0, -2.2419, 0.737671, 0, 2.2419, 281.184, 7.62939e-06, 165.541, 0.18399, 0, -2.77361, -0.18399, 0, 2.77361, 278.968, 7.62939e-06, 212.157, 2.11246, 0, -3.04477, -2.11246, 0, 3.04477, 277.85, 1.52588e-05, 351.554, 0, 0, 0, 0, 0, 0, 214.036, 1.52588e-05, 384.158, 0, 0, 0, 0, 0, 0, 162.537, 1.52588e-05, 423.084, 0, 0, 0, 0, 0, 0, 101.96, 2.28882e-05, 461.606, 0, 0, 0, 0, 0, 0, 60.2553, 2.28882e-05, 496.134, 0, 0, 0, 0, 0, 0, -37.3526, 2.28882e-05, 572.08, 0, 0, 0, 0, 0, 0, -126.713, 3.05176e-05, 628.582, 2.28014, 0, -1.35565, -2.28014, 0, 1.35565, -159.772, 3.05176e-05, 647.64, 4.39462, 0, -0.232117, -4.39462, 0, 0.232117, -177.93, 3.05176e-05, 651.83, 3.82706, 0, -0.888428, -3.82706, 0, 0.888428, -185.36, 3.05176e-05, 652.577, 3.84753, 0, -0.182739, -3.84753, 0, 0.182739, -197.884, 3.05176e-05, 658.215, 0, 0, 0, 0, 0, 0, -218.652, 3.05176e-05, 659.461),
-"tilts": PackedFloat32Array(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0)
+"points": PackedVector3Array(0, 0, 0, 0, 0, 0, 211.9, 0, 143, 0, 0, 0, 0, 0, 0, 224.7, 0, 143.2, -4.92807, 0, -0.0260773, 4.92807, 0, 0.0260773, 243, 0, 143.7, -2.76779, 0, -1.29846, 2.76779, 0, 1.29846, 262.827, 7.62939e-06, 149.918, -2.72363, 0, -1.57666, 2.72363, 0, 1.57666, 270.286, 7.62939e-06, 154.404, 1.8172, 4.54747e-12, -4.95421, -1.8172, -4.54747e-12, 4.95421, 281.184, 7.62939e-06, 165.541, 0.592438, 4.54747e-12, -6.90318, -0.592438, -4.54747e-12, 6.90318, 278.968, 7.62939e-06, 212.157, 0.0518799, -6.64759e-07, -5.75565, -0.0518799, 6.64759e-07, 5.75565, 275.629, 1.4594e-05, 337.529, 0.5784, 0, -6.12897, -0.5784, 0, 6.12897, 275.585, 1.52588e-05, 349.861, 7.78223, 0, -1.4678, -7.78223, 0, 1.4678, 262.473, 1.52588e-05, 359.817, 3.38754, 1.09139e-11, -2.09366, -3.38754, -1.09139e-11, 2.09366, 214.036, 1.52588e-05, 384.158, 3.68164, 1.09139e-11, -3.11108, -3.68164, -1.09139e-11, 3.11108, 162.537, 1.52588e-05, 423.084, 7.31541, 1.63709e-11, -2.58112, -7.31541, -1.63709e-11, 2.58112, 101.96, 2.28882e-05, 461.606, 3.25474, 1.63709e-11, -0.970459, -3.25474, -1.63709e-11, 0.970459, 60.2553, 2.28882e-05, 496.134, 3.30892, 1.63709e-11, -2.12335, -3.30892, -1.63709e-11, 2.12335, -37.3526, 2.28882e-05, 572.08, 3.44173, 2.18279e-11, -1.94849, -3.44173, -2.18279e-11, 1.94849, -126.713, 3.05176e-05, 628.582, 3.83275, 0, -2.6452, -3.83275, 0, 2.6452, -153.599, 3.05176e-05, 643.785, 3.23441, -2.18279e-11, -1.5658, -3.23441, 2.18279e-11, 1.5658, -159.772, 3.05176e-05, 647.64, 4.39462, 0, -0.232117, -4.39462, 0, 0.232117, -177.93, 3.05176e-05, 651.83, 3.82706, 0, -0.888428, -3.82706, 0, 0.888428, -185.36, 3.05176e-05, 652.577, 3.84753, 0, -0.182739, -3.84753, 0, 0.182739, -197.884, 3.05176e-05, 658.215, 0, 0, 0, 0, 0, 0, -218.652, 3.05176e-05, 659.461),
+"tilts": PackedFloat32Array(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0)
 }
-point_count = 19
+point_count = 22
 
 [node name="Game" type="Node3D"]
 
@@ -102,13 +107,45 @@ station_nps = Array[NodePath]([NodePath("../Stations/Station3D"), NodePath("../S
 switch_nps = Array[NodePath]([NodePath("../Switch3D"), NodePath("../Switch3D2"), NodePath("../Switch3D4")])
 
 [node name="PlayerLocomotive3D" parent="Path3D" groups=["train_12505"] instance=ExtResource("2_82f5e")]
-transform = Transform3D(-0.998059, -2.90203e-09, -0.0622844, -1.85071e-10, 1, -4.36276e-08, 0.0622844, -4.35314e-08, -0.998059, -916.617, 0.500038, 871.361)
+transform = Transform3D(-0.9982, -2.90239e-09, -0.0599641, -2.86483e-10, 1, -4.36331e-08, 0.0599641, -4.35375e-08, -0.9982, -918.012, 0.500037, 848.504)
+progress = 29.2605
 mass = 1000.0
 grade_texture = SubResource("FastNoiseLite_tvstv")
 
 [node name="BasicCoach3D" parent="Path3D" node_paths=PackedStringArray("engine") instance=ExtResource("4_r5d62")]
-transform = Transform3D(-0.998009, -2.90191e-09, -0.0630359, -1.52204e-10, 1, -4.36259e-08, 0.0630359, -4.35296e-08, -0.998009, -916.417, 0.500038, 874.535)
+transform = Transform3D(-0.998183, -2.90236e-09, -0.0601969, -2.76302e-10, 1, -4.36324e-08, 0.0601969, -4.35368e-08, -0.998183, -917.821, 0.500037, 851.679)
+progress = 26.08
 engine = NodePath("../PlayerLocomotive3D")
+
+[node name="BasicCoach3D2" parent="Path3D" node_paths=PackedStringArray("engine") instance=ExtResource("4_r5d62")]
+transform = Transform3D(-0.998169, -2.90231e-09, -0.0604444, -2.65482e-10, 1, -4.36319e-08, 0.0604444, -4.35361e-08, -0.998169, -917.629, 0.500037, 854.853)
+progress = 22.8995
+engine = NodePath("../BasicCoach3D")
+
+[node name="BasicCoach3D3" parent="Path3D" node_paths=PackedStringArray("engine") instance=ExtResource("4_r5d62")]
+transform = Transform3D(-0.998152, -2.90227e-09, -0.0607107, -2.53846e-10, 1, -4.36312e-08, 0.0607107, -4.35354e-08, -0.998152, -917.437, 0.500037, 858.028)
+progress = 19.719
+engine = NodePath("../BasicCoach3D")
+
+[node name="BasicCoach3D4" parent="Path3D" node_paths=PackedStringArray("engine") instance=ExtResource("4_r5d62")]
+transform = Transform3D(-0.998134, -2.90223e-09, -0.0610015, -2.41135e-10, 1, -4.36304e-08, 0.0610015, -4.35346e-08, -0.998134, -917.243, 0.500038, 861.202)
+progress = 16.5386
+engine = NodePath("../BasicCoach3D")
+
+[node name="BasicCoach3D5" parent="Path3D" node_paths=PackedStringArray("engine") instance=ExtResource("4_r5d62")]
+transform = Transform3D(-0.998115, -2.90217e-09, -0.0613266, -2.26918e-10, 1, -4.36297e-08, 0.0613266, -4.35338e-08, -0.998115, -917.049, 0.500038, 864.377)
+progress = 13.3581
+engine = NodePath("../BasicCoach3D")
+
+[node name="BasicCoach3D6" parent="Path3D" node_paths=PackedStringArray("engine") instance=ExtResource("4_r5d62")]
+transform = Transform3D(-0.998091, -2.90211e-09, -0.0617042, -2.10417e-10, 1, -4.36288e-08, 0.0617042, -4.35328e-08, -0.998091, -916.853, 0.500038, 867.552)
+progress = 10.1776
+engine = NodePath("../BasicCoach3D")
+
+[node name="BasicCoach3D7" parent="Path3D" node_paths=PackedStringArray("engine") instance=ExtResource("4_r5d62")]
+transform = Transform3D(-0.998062, -2.90204e-09, -0.0621723, -1.89951e-10, 1, -4.36277e-08, 0.0621723, -4.35316e-08, -0.998062, -916.656, 0.500038, 870.726)
+progress = 6.99708
+engine = NodePath("../BasicCoach3D")
 
 [node name="CSGPolygon3D" type="CSGPolygon3D" parent="Path3D"]
 polygon = PackedVector2Array(-1, 2.08189e-12, -1, 1, 1, 1, 1, 2.08189e-12)
@@ -140,6 +177,7 @@ transform = Transform3D(0.998719, 0, 0.0505929, 0, 1, 0, -0.0505929, 0, 0.998719
 audio_bus_override = true
 audio_bus_name = &"Station"
 script = ExtResource("6_o2t5b")
+station_info = ExtResource("7_16e6e")
 
 [node name="Station" type="MeshInstance3D" parent="Stations/Station3D"]
 transform = Transform3D(1.89463, 0, 0, 0, 1, 0, 2.23517e-08, 0, 58.1533, 2.72986, 0, -0.000366211)
@@ -169,6 +207,7 @@ transform = Transform3D(0.0548108, 0, 0.998497, 0, 1, 0, -0.998497, 0, 0.0548108
 audio_bus_override = true
 audio_bus_name = &"Station"
 script = ExtResource("6_o2t5b")
+station_info = ExtResource("9_2bhpr")
 
 [node name="Station" type="MeshInstance3D" parent="Stations/Station3D2"]
 transform = Transform3D(1.89463, 0, 0, 0, 1, 0, 2.23517e-08, 0, 58.1533, 2.72986, 0, -0.000366211)
@@ -201,6 +240,7 @@ transform = Transform3D(-0.00752226, 0, 0.999972, 0, 1, 0, -0.999972, 0, -0.0075
 audio_bus_override = true
 audio_bus_name = &"Station"
 script = ExtResource("6_o2t5b")
+station_info = ExtResource("10_vplqq")
 
 [node name="Station" type="MeshInstance3D" parent="Stations/Station3D3"]
 transform = Transform3D(1.89463, 0, 0, 0, 1, 0, 2.23517e-08, 0, 58.1533, 2.72986, 0, -0.000366211)
@@ -254,6 +294,22 @@ verging_path = NodePath("../Path3D2")
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Switch3D"]
 shape = SubResource("BoxShape3D_ljqml")
 
+[node name="Label3D" type="Label3D" parent="Switch3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.29512, 0)
+billboard = 2
+text = "Not Switched
+|
+|
+|
+|
+|
+|
+|
+|
+|
+|"
+font_size = 128
+
 [node name="Switch3D2" type="Area3D" parent="." node_paths=PackedStringArray("main_path", "verging_path") groups=["switch"]]
 transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 275.004, 0.5, 650.512)
 script = ExtResource("9_mxc50")
@@ -265,8 +321,24 @@ converging = true
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Switch3D2"]
 shape = SubResource("BoxShape3D_ljqml")
 
+[node name="Label3D" type="Label3D" parent="Switch3D2"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.29512, 0)
+billboard = 2
+text = "Switched
+|
+|
+|
+|
+|
+|
+|
+|
+|
+|"
+font_size = 127
+
 [node name="Switch3D3" type="Area3D" parent="." node_paths=PackedStringArray("main_path", "verging_path") groups=["switch"]]
-transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 247.044, 0.5, 143.354)
+transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 247.044, -0.440876, 143.354)
 script = ExtResource("9_mxc50")
 main_path = NodePath("../Path3D2")
 verging_path = NodePath("../RailTrack3D")
@@ -275,8 +347,24 @@ switch = true
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Switch3D3"]
 shape = SubResource("BoxShape3D_ljqml")
 
+[node name="Label3D" type="Label3D" parent="Switch3D3"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.29512, 0)
+billboard = 2
+text = "Switched
+|
+|
+|
+|
+|
+|
+|
+|
+|
+|"
+font_size = 127
+
 [node name="Switch3D4" type="Area3D" parent="." node_paths=PackedStringArray("main_path", "verging_path") groups=["switch"]]
-transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, -196, 0.5, 658)
+transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, -196, -0.994397, 658)
 script = ExtResource("9_mxc50")
 main_path = NodePath("../Path3D")
 verging_path = NodePath("../RailTrack3D")
@@ -285,6 +373,22 @@ converging = true
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Switch3D4"]
 shape = SubResource("BoxShape3D_ljqml")
+
+[node name="Label3D" type="Label3D" parent="Switch3D4"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.29512, 0)
+billboard = 2
+text = "Switched
+|
+|
+|
+|
+|
+|
+|
+|
+|
+|"
+font_size = 127
 
 [node name="RailTrack3D" type="Path3D" parent="."]
 curve = SubResource("Curve3D_vwhxd")
@@ -311,3 +415,7 @@ engine_node = NodePath("../Path3D/PlayerLocomotive3D")
 [node name="TrainsCollection" type="Node3D" parent="."]
 
 [node name="Train3D1" type="Node3D" parent="TrainsCollection"]
+script = ExtResource("10_67wm0")
+engine_nps = Array[NodePath]([NodePath("../../Path3D/PlayerLocomotive3D")])
+coach_nps = Array[NodePath]([NodePath("../../Path3D/BasicCoach3D"), NodePath("../../Path3D/BasicCoach3D2"), NodePath("../../Path3D/BasicCoach3D3"), NodePath("../../Path3D/BasicCoach3D4"), NodePath("../../Path3D/BasicCoach3D5"), NodePath("../../Path3D/BasicCoach3D6"), NodePath("../../Path3D/BasicCoach3D7")])
+train_info = ExtResource("13_o2n2l")

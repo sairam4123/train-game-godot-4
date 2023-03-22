@@ -1,11 +1,15 @@
-extends Area3D
-class_name Station3D
+extends Node3D
 
-@export var station_info: StationInfo
+@export var engine_nps: Array[NodePath]
+@export var coach_nps: Array[NodePath]
+
+@export var train_info: TrainInfo
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
-	pass
+	pass # Replace with function body.
+
+
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
 	pass

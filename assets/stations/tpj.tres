@@ -1,0 +1,10 @@
+[gd_resource type="Resource" script_class="StationInfo" load_steps=2 format=3 uid="uid://c3psmfhaydbil"]
+
+[ext_resource type="Script" path="res://station_system/station_info.gd" id="1_fsqo7"]
+
+[resource]
+script = ExtResource("1_fsqo7")
+name = "Tiruchirappalli"
+code = "TPJ"
+type = 1
+platform = 6

@@ -1,0 +1,10 @@
+[gd_resource type="Resource" script_class="StationInfo" load_steps=2 format=3 uid="uid://5xjarxrfar6t"]
+
+[ext_resource type="Script" path="res://station_system/station_info.gd" id="1_klwq4"]
+
+[resource]
+script = ExtResource("1_klwq4")
+name = "Pudukkottai"
+code = "PDKT"
+type = 0
+platform = 3

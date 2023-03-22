@@ -79,7 +79,6 @@ texture = SubResource("NoiseTexture2D_4f3p6")
 title = "DEBUG PANEL"
 position = Vector2i(8, 32)
 size = Vector2i(203, 237)
-content_scale_mode = 2
 theme_override_icons/close = SubResource("ImageTexture_vjoii")
 theme_override_icons/close_pressed = SubResource("ImageTexture_ipnfn")
 
@@ -117,6 +116,7 @@ size_flags_vertical = 3
 label_settings = SubResource("LabelSettings_4cblr")
 
 [node name="MarginContainer2" type="MarginContainer" parent="DebugPanel/PanelContainer2/VBoxContainer"]
+visible = false
 layout_mode = 2
 theme_override_constants/margin_left = 10
 theme_override_constants/margin_top = 10
@@ -132,8 +132,8 @@ label_settings = SubResource("LabelSettings_4cblr")
 [node name="Controls" type="Window" parent="."]
 own_world_3d = true
 title = "CONTROLS"
-position = Vector2i(794, 261)
-size = Vector2i(350, 377)
+position = Vector2i(794, 229)
+size = Vector2i(350, 409)
 transient = true
 unresizable = true
 theme_override_icons/close = SubResource("ImageTexture_mt7vu")
@@ -167,6 +167,12 @@ label_settings = SubResource("LabelSettings_r2s03")
 horizontal_alignment = 1
 vertical_alignment = 1
 uppercase = true
+
+[node name="Vigilante" type="Button" parent="Controls/PanelContainer/MarginContainer/VBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+disabled = true
+text = "I AM ACTIVE"
 
 [node name="PanelContainer" type="PanelContainer" parent="Controls/PanelContainer/MarginContainer/VBoxContainer"]
 layout_mode = 2

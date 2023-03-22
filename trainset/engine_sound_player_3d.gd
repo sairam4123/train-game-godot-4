@@ -19,6 +19,9 @@ var _current_throttle: int:
 	get:
 		return int(__current_throttle)
 
+@export var current_pitch: float = 1:
+	get:
+		return $IdleSoundPlayer3D.pitch_scale
 ## [configurable]
 
 @export var max_pitch: float = 2.1
@@ -90,7 +93,15 @@ func _ready():
 
 func _physics_process(delta):
 	if Engine.is_editor_hint():
+		var current_pitch = $IdleSoundPlayer3D.current_pitch_scale
+		if $IdleSoundPlayer3D.is_engine_idling:
+			var tract_force_kN = (_current_throttle / 12)
+			var alpha = (1/min_pitch) * (max_pitch - min_pitch)/ (max_tractive_force_allowed)
+			var pitch = min_pitch * (1 + alpha * (tract_force_kN))
+			current_pitch += (pitch-current_pitch) * delta
+		$IdleSoundPlayer3D.current_pitch_scale = current_pitch
 		return
+	
 	var current_pitch = $IdleSoundPlayer3D.current_pitch_scale
 	if $IdleSoundPlayer3D.is_engine_idling:
 		var tract_force_kN = _engine.tractive_force / 1000

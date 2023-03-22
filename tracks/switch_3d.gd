@@ -34,4 +34,7 @@ func toggle_switch():
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
-	pass
+	if switch:
+		$Label3D.text = "Switched\n" + "|\n".repeat(10).rstrip('\n')
+	else:
+		$Label3D.text = "Not Switched\n" + "|\n".repeat(10).rstrip('\n')

@@ -17,6 +17,19 @@ func _ready():
 	UIAccessor.ui_node.get_node("%Bell").button_up.connect(_bell_state_changed.bind(false))
 	UIAccessor.ui_node.get_node("%Bell").button_down.connect(_bell_state_changed.bind(true))
 
+func _physics_process(delta):
+	var debug_layout = UIAccessor.ui_node
+	rev = debug_layout.get_node("%Reverser").value
+	throttle = debug_layout.get_node("%Throttle").value/100.0
+	brake = debug_layout.get_node("%Brake").value/100.0
+	$EnginePhysics3D.throttle = throttle
+#	$EnginePhysics3D.rev = rev
+	$EnginePhysics3D.brake = brake
+	velocity = $EnginePhysics3D.velocity
+	DebugPrint.add_text("Velocity: %.2f\n" % (velocity * 3.6))
+	progress += velocity * delta
+	super(delta)
+
 func _input(event: InputEvent):
 	if event is InputEventKey:
 		if event.keycode == KEY_W and event.pressed:

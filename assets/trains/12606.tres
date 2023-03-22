@@ -1,0 +1,11 @@
+[gd_resource type="Resource" script_class="TrainInfo" load_steps=2 format=3 uid="uid://b3tyjyj6in64m"]
+
+[ext_resource type="Script" path="res://consist_system/train_info.gd" id="1_a22j1"]
+
+[resource]
+script = ExtResource("1_a22j1")
+number = 12606
+name = "Pallavan"
+type = 2
+metadata/_editor_prop_ptr_from = NodePath("../../Stations/Station3D")
+metadata/_editor_prop_ptr_to = NodePath("../../Stations/Station3D3")

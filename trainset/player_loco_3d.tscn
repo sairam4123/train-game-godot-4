@@ -1,7 +1,16 @@
-[gd_scene load_steps=3 format=3 uid="uid://mlrgx0r6x1cr"]
+[gd_scene load_steps=5 format=3 uid="uid://mlrgx0r6x1cr"]
 
 [ext_resource type="PackedScene" uid="uid://b01d076uikggd" path="res://trainset/basic_locomotive_3d.tscn" id="1_kt1ma"]
 [ext_resource type="Script" path="res://trainset/player_loco_3d.gd" id="2_08snc"]
+[ext_resource type="Script" path="res://trainset/vigilance_mod.gd" id="3_p2nju"]
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_yeeac"]
+noise_type = 3
+seed = 77
+frequency = 0.012
+fractal_octaves = 10
+fractal_gain = 0.435
+fractal_weighted_strength = 0.92
 
 [node name="PlayerLocomotive3D" instance=ExtResource("1_kt1ma")]
 script = ExtResource("2_08snc")
@@ -13,3 +22,12 @@ action_starter_on = null
 
 [node name="BellSoundPlayer3D" parent="." index="4"]
 pitch_scale = 1.2
+
+[node name="Vigilance" type="Node3D" parent="." index="7"]
+script = ExtResource("3_p2nju")
+
+[node name="EnginePhysics3D" parent="." index="8"]
+grade_texture = SubResource("FastNoiseLite_yeeac")
+
+[connection signal="honked" from="." to="Vigilance" method="_on_player_locomotive_3d_honked"]
+[connection signal="engine_started" from="EngineSoundPlayer3D" to="Vigilance" method="_on_engine_sound_player_3d_engine_started"]
