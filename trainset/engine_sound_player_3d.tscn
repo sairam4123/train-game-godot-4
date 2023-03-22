@@ -10,7 +10,6 @@
 [node name="EngineSoundPlayer3D" type="Node3D"]
 script = ExtResource("1_34dn7")
 current_pitch = 0.01
-autostart = true
 
 [node name="PantoSoundPlayer3D" type="AudioStreamPlayer3D" parent="."]
 stream = ExtResource("4_ml2d1")
@@ -25,6 +24,7 @@ stream = ExtResource("5_mp5oi")
 attenuation_model = 1
 volume_db = -23.937
 pitch_scale = 0.01
+stream_paused = true
 script = ExtResource("5_tjbnd")
 
 [connection signal="finished" from="PantoSoundPlayer3D" to="PantoSoundPlayer3D" method="_on_finished"]

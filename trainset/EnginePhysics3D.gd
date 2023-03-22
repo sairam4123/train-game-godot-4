@@ -57,6 +57,7 @@ func _calculate_physics(delta):
 	acceleration = total_force / m
 #	prints(engine_force, resistive_force, brake_force, total_force, acceleration)
 	velocity += acceleration * delta
+	tractive_force = clamp(abs(tractive_effort) - abs(resistive_force), 0, INF)
 
 
 #

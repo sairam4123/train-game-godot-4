@@ -25,6 +25,7 @@ pitch_scale = 1.2
 
 [node name="Vigilance" type="Node3D" parent="." index="7"]
 script = ExtResource("3_p2nju")
+vigilante_enabled = true
 
 [node name="EnginePhysics3D" parent="." index="8"]
 grade_texture = SubResource("FastNoiseLite_yeeac")

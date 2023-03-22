@@ -109,8 +109,12 @@ func power_state_changed(changed_value, power_mode):
 func _physics_process(delta):
 	if Engine.is_editor_hint():
 		return
-	var debug_layout = UIAccessor.ui_node
-	var res_const = debug_layout.get_node("%ResConst").value
+
+	$EnginePhysics3D.throttle = throttle
+	$EnginePhysics3D.rev = rev
+	$EnginePhysics3D.brake = brake
+	$EnginePhysics3D.is_powered = is_powered
+
 	
  #  + (
 #		(offset-real_offset)
