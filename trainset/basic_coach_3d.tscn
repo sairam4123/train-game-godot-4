@@ -1,10 +1,11 @@
-[gd_scene load_steps=9 format=3 uid="uid://drsr4nhoggbsh"]
+[gd_scene load_steps=11 format=3 uid="uid://drsr4nhoggbsh"]
 
 [ext_resource type="Script" path="res://trainset/basic_coach_3d.gd" id="1_6hneq"]
 [ext_resource type="Texture2D" uid="uid://xs0m4s5m3wmr" path="res://icon.svg" id="2_ay6ph"]
 [ext_resource type="Script" path="res://trainset/camera_control_3d.gd" id="3_eey16"]
 [ext_resource type="PackedScene" uid="uid://d0lieygq5lh47" path="res://trainset/coach_sound_player_3d.tscn" id="4_76do2"]
 [ext_resource type="PackedScene" uid="uid://dtlnooi7b5iw1" path="res://trainset/switcher_3d.tscn" id="5_3morr"]
+[ext_resource type="Script" path="res://trainset/EnginePhysics3D.gd" id="6_0hnsy"]
 
 [sub_resource type="CompressedTexture2D" id="CompressedTexture2D_p04yq"]
 load_path = "res://.godot/imported/icon.svg-218a8f2b3041327d8a5756f3a245f83b.s3tc.ctex"
@@ -19,15 +20,20 @@ albedo_color = Color(0.168627, 0.282353, 0.701961, 1)
 albedo_texture = ExtResource("2_ay6ph")
 uv1_scale = Vector3(1, 8, 2.08189e-12)
 
-[node name="BasicCoach3D" type="PathFollow3D" node_paths=PackedStringArray("engine") groups=["train_12505"]]
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_8a0fu"]
+noise_type = 3
+frequency = 0.0011
+fractal_type = 0
+
+[node name="BasicCoach3D" type="PathFollow3D" groups=["train_12505"]]
 transform = Transform3D(-0.998009, -2.90191e-09, -0.0630359, -1.52204e-10, 1, -4.36259e-08, 0.0630359, -4.35296e-08, -0.998009, -916.417, 0.500038, 874.535)
 progress = 3.18049
 v_offset = 0.5
 script = ExtResource("1_6hneq")
-engine = NodePath("")
 
 [node name="MeshInstance3D" type="CSGBox3D" parent="."]
 transform = Transform3D(1, -1.11022e-15, 0, -6.66134e-16, 1, -7.10543e-15, 0, 0, 1, 0, 0.866973, 0)
+layers = 3
 size = Vector3(3, 3, 2.5)
 material = SubResource("StandardMaterial3D_jkq6d")
 
@@ -46,7 +52,9 @@ script = ExtResource("3_eey16")
 transform = Transform3D(1, -5.32582e-16, 2.96431e-16, 2.96431e-16, 0.849893, 0.526956, -5.32582e-16, -0.526956, 0.849893, 0, 0, 0)
 
 [node name="Camera3D" type="Camera3D" parent="MeshInstance3D/CameraRig/CameraRotate"]
+unique_name_in_owner = true
 transform = Transform3D(1, -1.00826e-09, 1.014e-09, -6.57858e-16, 1, -2.16027e-17, -7.12902e-16, -2.16027e-17, 1, 2.08189e-12, 2.08189e-12, 7.5)
+cull_mask = 1048573
 current = true
 far = 200.0
 
@@ -55,3 +63,8 @@ volume_db = -12.24
 max_distance = 25.0
 
 [node name="Switcher3D" parent="." instance=ExtResource("5_3morr")]
+
+[node name="EnginePhysics3D" type="Node3D" parent="."]
+script = ExtResource("6_0hnsy")
+power_output = 4563.38
+grade_texture = SubResource("FastNoiseLite_8a0fu")

@@ -12,8 +12,8 @@ enum TrainType {
 @export var number: int = 0
 @export var name: String = ""
 @export var type: TrainType = TrainType.PASSENGER
-@export var from: Station3D
-@export var to: Station3D
+@export var from: StationInfo
+@export var to: StationInfo
 
 # Called when the node enters the scene tree for the first time.
 func _ready():

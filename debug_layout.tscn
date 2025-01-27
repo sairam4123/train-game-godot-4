@@ -1,7 +1,10 @@
-[gd_scene load_steps=24 format=3 uid="uid://dywdat0d4opxi"]
+[gd_scene load_steps=27 format=3 uid="uid://dywdat0d4opxi"]
 
 [ext_resource type="PackedScene" uid="uid://dpp7ahwhns8ah" path="res://Starter.tscn" id="1_qcd38"]
 [ext_resource type="PackedScene" uid="uid://bipu6ltfiskoj" path="res://slider_control.tscn" id="2_1442o"]
+[ext_resource type="Texture2D" uid="uid://xs0m4s5m3wmr" path="res://icon.svg" id="3_jlnhv"]
+[ext_resource type="Script" path="res://addons/input_manager/InputManager.gd" id="4_g3s34"]
+[ext_resource type="PackedScene" uid="uid://matey1bi2sb2" path="res://ui/speedometer.tscn" id="5_syupi"]
 
 [sub_resource type="FastNoiseLite" id="FastNoiseLite_v3dh5"]
 metadata/_preview_in_3d_space_ = true
@@ -79,6 +82,7 @@ texture = SubResource("NoiseTexture2D_4f3p6")
 title = "DEBUG PANEL"
 position = Vector2i(8, 32)
 size = Vector2i(203, 237)
+wrap_controls = true
 theme_override_icons/close = SubResource("ImageTexture_vjoii")
 theme_override_icons/close_pressed = SubResource("ImageTexture_ipnfn")
 
@@ -221,6 +225,8 @@ vertical_alignment = 1
 [node name="Starter" parent="Controls/PanelContainer/MarginContainer/VBoxContainer/PanelContainer/MarginContainer/VBoxContainer/VBoxContainer/MarginContainer2/HBoxContainer/Starter/MarginContainer/VBoxContainer2" instance=ExtResource("1_qcd38")]
 unique_name_in_owner = true
 layout_mode = 2
+step = 0.01
+detectable_zone = 0.02
 
 [node name="HBoxContainer2" type="HBoxContainer" parent="Controls/PanelContainer/MarginContainer/VBoxContainer/PanelContainer/MarginContainer/VBoxContainer/VBoxContainer/MarginContainer2/HBoxContainer/Starter/MarginContainer/VBoxContainer2"]
 layout_mode = 2
@@ -401,7 +407,8 @@ text = "9.852"
 [node name="SwitchBox" type="Window" parent="."]
 title = "SWITCH BOX"
 position = Vector2i(8, 548)
-size = Vector2i(220, 100)
+size = Vector2i(160, 100)
+visible = false
 extend_to_title = true
 theme_override_icons/close = SubResource("ImageTexture_twk00")
 theme_override_icons/close_pressed = SubResource("ImageTexture_qsn2b")
@@ -488,6 +495,113 @@ text = "M"
 layout_mode = 2
 size_flags_horizontal = 10
 text = "V"
+
+[node name="SwitcherWindow" type="Window" parent="."]
+handle_input_locally = false
+physics_object_picking = true
+title = "Map"
+position = Vector2i(266, 58)
+size = Vector2i(500, 500)
+
+[node name="ColorRect" type="ColorRect" parent="SwitcherWindow"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 1
+color = Color(0, 0.4, 0.152941, 1)
+
+[node name="MapTexture" type="TextureRect" parent="SwitcherWindow/ColorRect"]
+unique_name_in_owner = true
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="MarginContainer" type="MarginContainer" parent="SwitcherWindow/ColorRect"]
+layout_mode = 1
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -140.0
+offset_top = -101.0
+grow_horizontal = 0
+grow_vertical = 0
+theme_override_constants/margin_left = 10
+theme_override_constants/margin_top = 10
+theme_override_constants/margin_right = 10
+theme_override_constants/margin_bottom = 10
+
+[node name="VBoxContainer" type="VBoxContainer" parent="SwitcherWindow/ColorRect/MarginContainer"]
+layout_mode = 2
+
+[node name="ResetLoc" type="Button" parent="SwitcherWindow/ColorRect/MarginContainer/VBoxContainer"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(140, 0)
+layout_mode = 2
+text = "Reset Location"
+
+[node name="FollowLoc" type="Button" parent="SwitcherWindow/ColorRect/MarginContainer/VBoxContainer"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(140, 0)
+layout_mode = 2
+toggle_mode = true
+text = "Follow Object"
+
+[node name="Button" type="Button" parent="SwitcherWindow/ColorRect/MarginContainer/VBoxContainer"]
+layout_mode = 2
+disabled = true
+text = "Switched"
+flat = true
+
+[node name="TextureRect" type="TextureRect" parent="SwitcherWindow/ColorRect/MarginContainer/VBoxContainer/Button"]
+modulate = Color(0.658824, 0.658824, 0.658824, 0.901961)
+layout_mode = 0
+offset_left = -40.0
+offset_right = -10.0
+offset_bottom = 30.0
+texture = ExtResource("3_jlnhv")
+expand_mode = 5
+stretch_mode = 5
+
+[node name="Button2" type="Button" parent="SwitcherWindow/ColorRect/MarginContainer/VBoxContainer"]
+layout_mode = 2
+disabled = true
+text = "Not Switched"
+flat = true
+
+[node name="TextureRect" type="TextureRect" parent="SwitcherWindow/ColorRect/MarginContainer/VBoxContainer/Button2"]
+modulate = Color(0.27451, 0.784314, 0, 0.901961)
+layout_mode = 0
+offset_left = -40.0
+offset_right = -10.0
+offset_bottom = 30.0
+texture = ExtResource("3_jlnhv")
+expand_mode = 5
+stretch_mode = 5
+
+[node name="InputManager" type="Node" parent="SwitcherWindow"]
+script = ExtResource("4_g3s34")
+
+[node name="Speedometer" parent="." instance=ExtResource("5_syupi")]
+unique_name_in_owner = true
+layout_mode = 1
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -300.0
+offset_top = -300.0
+offset_right = 0.0
+offset_bottom = 0.0
+grow_horizontal = 0
+grow_vertical = 0
 
 [editable path="Controls/PanelContainer/MarginContainer/VBoxContainer/HBoxContainer/Reverser"]
 [editable path="Controls/PanelContainer/MarginContainer/VBoxContainer/HBoxContainer/Throttle"]

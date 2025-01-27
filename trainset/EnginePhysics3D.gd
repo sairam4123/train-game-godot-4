@@ -2,13 +2,12 @@ extends Node3D
 
 
 ## Global
-@export var power_output = 4740.0
-@export var throttle_efficiency = 0.88
-@export var engine_mass = 123.0
-@export var coach_mass = 39.5 * 24
+@export var power_output = 4760.68
+@export var throttle_efficiency = 1.0
 
-@export var frontal_area = 13
+@export var frontal_area = 13.41176
 @export var grade_texture: FastNoiseLite
+
 
 
 var g = 9.81
@@ -16,23 +15,33 @@ var Crr = 0.001
 var Cd = 0.3
 var rho = 1.29
 
-## Per instance
-var throttle = 0
+## Input params
+var wagon_position: Vector3
+var total_mass: float = 10  # t
+var throttle = 0.0
 var rev = -1
 var brake = 0.0
 var is_powered = true
+var brake_efficiency = 1.0
+var braking_force = 259.876225 # kN
+var coupling_force: float = 0
+var starting_tractive_effort = 322.8 # kN
 
 ## Out params
 var velocity: float = 0
 var total_force: float
 var acceleration: float
+var tractive_effort: float
+var momentum: float
 
 ## Debug params
-var tractive_effort: float
 var engine_force: float
 var tractive_force: float
 var brake_force: float
 var resistive_force: float
+var height: float = 0
+var prev_momentum: float
+var d_p: float
 
 
 
@@ -42,24 +51,74 @@ func _ready():
 
 func _physics_process(delta):
 	_calculate_physics(delta)
-	
+
 func _calculate_physics(delta):
-	var m = engine_mass + coach_mass
-#	prints(velocity, throttle)
-	## Resistive Constant (Aerodynamic Drag and Rolling resistance)
-	tractive_effort = (throttle * power_output * throttle_efficiency * int(is_powered))
-	engine_force = tractive_effort * rev
-	resistive_force = -(0.5 * frontal_area * Cd * rho * velocity * abs(velocity)) + -(m * g * Crr * velocity)
-	brake_force = (-brake * m * g * velocity)
-	var theta = grade_texture.get_noise_2d(global_position.x, global_position.z)
-	var grade_force = -(m * g * sin(theta * 0.01))
-	total_force = engine_force + resistive_force + grade_force + brake_force
+	var m = total_mass * 1000
+	var prev_momentum = momentum
+	## Slope calculation
+	var new_height = grade_texture.get_noise_2d(wagon_position.x, wagon_position.z)
+	var dH = new_height-height
+	var dS = velocity * delta
+	var slope = atan2(dH,dS)
+	DebugPrint.add_text(name + " Signed Velocity: %.2f\n" % min(velocity, signf(velocity)))
+	DebugPrint.add_text(name + " Power Output: %.2f \n" % ((throttle * throttle_efficiency * power_output * int(is_powered) * 1000)))
+	tractive_force = ((throttle * throttle_efficiency * power_output * int(is_powered) * 1000) / velocity if velocity > 1 else starting_tractive_effort * 1000)
+	engine_force = tractive_force * rev
+	## Resistive Forces Calculation (Aerodynamic Drag and Rolling Resistance)
+	resistive_force = (-(0.5 * frontal_area * Cd * rho * velocity * abs(velocity)) + -(m * g * Crr * velocity))
+	brake_force = (-brake * brake_efficiency * (braking_force * 1000) * min(velocity, signf(velocity)))
+	
+	var grade_force = -(m * g * sin(slope)) # *0 
+	var forward_force = coupling_force if coupling_force else engine_force
+	total_force = resistive_force + grade_force + brake_force + (d_p * delta) + forward_force
 	acceleration = total_force / m
+	height = new_height
 #	prints(engine_force, resistive_force, brake_force, total_force, acceleration)
 	velocity += acceleration * delta
-	tractive_force = clamp(abs(tractive_effort) - abs(resistive_force), 0, INF)
+	momentum = total_mass * velocity
+	d_p = momentum - prev_momentum
+	tractive_effort = clamp(abs(forward_force) - abs(resistive_force), 0, INF)
 
+# AI Generated
+#func calculate_physics(delta):
+#	var m = total_mass
+#
+#	# Calculate resistive force
+#	var speed = velocity.length()
+#	var resistive_force = -(0.5 * frontal_area * Cd * rho * speed * speed) + -(m * g * Crr * speed)
+#
+#	# Calculate tractive force
+#	var tractive_effort = (throttle * power_output * throttle_efficiency * int(is_powered))
+#	var theta = grade_texture.get_noise_2d(engine_position.x, engine_position.z)
+#	var grade_force = -(m * g * sin(theta * 0.01))
+#	var tractive_force = tractive_effort + grade_force - resistive_force
+#
+#	# Calculate acceleration
+#	var acceleration = tractive_force / m
+#
+#	# Update velocity and momentum
+#	velocity = velocity + acceleration * delta
+#	momentum = velocity * m
+#
+#	# Apply inertia
+#	if is_on_track and momentum.length_squared() > 0:
+#		var direction = momentum.normalized()
+#		var max_speed = sqrt(2 * max_traction_force * wheel_radius / m)
+#		var max_momentum = max_speed * m
+#		var resistance = max_momentum * (1 - pow(speed / max_speed, 2))
+#		momentum = momentum.slide(direction * tractive_force * delta, resistance * delta)
+#
+#	# Apply braking
+#	if brake > 0:
+#		var braking_force = brake * m * g
+#		if velocity.length_squared() > 0:
+#			var braking_direction = -velocity.normalized()
+#			momentum = momentum.slide(braking_direction * braking_force * delta)
+#
+#	# Update position
+#	position += velocity * delta
 
+#My old code
 #
 #	var debug_label = debug_layout.get_node("%DebugLabel")
 #	velocity = snappedf(velocity, 0.0001)

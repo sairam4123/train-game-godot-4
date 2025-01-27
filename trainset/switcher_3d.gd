@@ -46,9 +46,9 @@ func _on_area_3d_area_entered(area):
 	# the area is switch 3d
 	switch_area = area
 	is_inside_switch_area = true
-	var is_conv = is_convergingv(switch_area.converging, signi(owner_wagon.velocity))
+	var is_conv = is_convergingv(switch_area.converging, owner_wagon.direction_of_motion)
 	if not is_conv:
-		var can_sw = should_switchv(signi(owner_wagon.velocity), switch_area.switch, false, is_conv)
+		var can_sw = should_switchv(owner_wagon.direction_of_motion, switch_area.switch, false, is_conv)
 		if can_sw:
 			call_deferred("switch")
 
@@ -60,17 +60,17 @@ func _on_area_3d_area_exited(area):
 	
 	is_inside_switch_area = false
 	switch_area = area
-	var is_conv = is_convergingv(switch_area.converging, signi(owner_wagon.velocity))
+	var is_conv = is_convergingv(switch_area.converging, owner_wagon.direction_of_motion)
 	var loop_line = switch_area.verging_path == get_parent().get_parent()
 	prints(get_parent().name, "is on loop line: ", loop_line)
 	if is_conv:
-		var can_sw = should_switchv(signi(owner_wagon.velocity), switch_area.switch, loop_line, is_conv)
+		var can_sw = should_switchv(owner_wagon.direction_of_motion, switch_area.switch, loop_line, is_conv)
 		if can_sw:
 			call_deferred("switch")
 
 
 func get_switching_path() -> Path3D:
-	var is_conv = is_convergingv(switch_area.converging, signi(owner_wagon.velocity))
+	var is_conv = is_convergingv(switch_area.converging, owner_wagon.direction_of_motion)
 	var loop_line = false
 	if is_conv:
 		loop_line = switch_area.verging_path == get_parent().get_parent()
@@ -81,12 +81,19 @@ func get_switching_path() -> Path3D:
 
 
 func switch():
+#	if switch_area.is_looper:
+#		print("looping")
+#		get_parent().is_looped = not get_parent().is_looped
 	var switching_path = get_switching_path()
 	var current_path = get_parent().get_parent()
+	if current_path.is_looper:
+		var conv = is_convergingv(switch_area.converging, owner_wagon.direction_of_motion)
+		if conv:
+			get_parent().is_looped = not get_parent().is_looped
 	if current_path == switching_path:
-		push_warning("Already switched!")
+		push_warning("%s already switched! %s" % [get_parent().name, switching_path.name])
 		return
 	in_switch_progress = true
 	get_parent().reparent(switching_path)
-	get_parent().progress = switching_path.curve.get_closest_offset(get_parent().global_position)
+	get_parent().progress = switching_path.curve.get_closest_offset(switching_path.to_local(get_parent().global_position))
 	in_switch_progress = false

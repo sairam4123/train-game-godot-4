@@ -18,18 +18,27 @@ func play_audio_fade_out_apn(apn, duration: int = 1, tween = null):
 	if not tween:
 		tween = get_tree().create_tween()
 	(
-		tween.tween_property(
-			apn, "volume_db", linear_to_db(0.001), duration)
+	tween.tween_property(
+		apn, "volume_db", linear_to_db(0.001), duration)
 	.from_current().set_trans(Tween.TRANS_QUINT).set_ease(Tween.EASE_IN)
 	)
 	return apn
 
 func play_audio_crossfade_apn(apn1, apn2, callback: Callable, volume: float = 12.5, duration: int = 1):
-	var tween = get_tree().create_tween()
-	tween = tween.parallel()
+	var tween
+	if apn1 or apn2:
+		tween = get_tree().create_tween()
+		tween = tween.set_parallel()
+		tween.finished.connect(callback)
 	if apn2:
-		apn2 = play_audio_fade_in_apn(apn2, duration, volume, tween)
+		(
+			tween.tween_property(apn2, "volume_db", linear_to_db((volume)/100.0), duration)
+			.from(linear_to_db(0.001)).set_trans(Tween.TRANS_QUINT).set_ease(Tween.EASE_IN)
+		)
 	if apn1:
-		apn1 = play_audio_fade_out_apn(apn1, duration, tween)
-	tween.finished.connect(callback)
+		(
+		tween.tween_property(
+			apn1, "volume_db", linear_to_db(0.001), duration)
+		.from_current().set_trans(Tween.TRANS_QUINT).set_ease(Tween.EASE_IN)
+		)
 	return [apn1, apn2]

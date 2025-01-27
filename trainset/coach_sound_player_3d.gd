@@ -36,10 +36,12 @@ func _physics_process(delta):
 		print("Switching from: %s to %s" % [current_apn, new_apn])
 		if new_apn:
 			new_apn.play()
+		await get_tree().create_timer(0.25).timeout
 		
 		UIAccessor.play_audio_crossfade_apn(current_apn, new_apn, (func crossfade_callback(apn):
 			print("Callback called!")
 			prints(current_apn, new_apn, apn)
+			await get_tree().create_timer(0.25).timeout
 			if apn and (not apn == current_apn):
 				apn.stop()
 		).bind(current_apn))

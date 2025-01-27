@@ -32,7 +32,7 @@ var _current_throttle: int:
 
 ## [configurable]
 ## Safe tractive effort allowed may cause damage if the tractive surpasses this limit. Unit: kN
-@export var max_tractive_force_allowed: float = 8.0
+@export var max_tractive_effort_allowed: float = 32.0
 
 
 ## Autostart the engine when panto goes up (only if mode is electric)
@@ -96,7 +96,7 @@ func _physics_process(delta):
 		var current_pitch = $IdleSoundPlayer3D.current_pitch_scale
 		if $IdleSoundPlayer3D.is_engine_idling:
 			var tract_force_kN = (_current_throttle / 12)
-			var alpha = (1/min_pitch) * (max_pitch - min_pitch)/ (max_tractive_force_allowed)
+			var alpha = (1 / min_pitch) * (max_pitch - min_pitch) / (max_tractive_effort_allowed)
 			var pitch = min_pitch * (1 + alpha * (tract_force_kN))
 			current_pitch += (pitch-current_pitch) * delta
 		$IdleSoundPlayer3D.current_pitch_scale = current_pitch
@@ -104,8 +104,8 @@ func _physics_process(delta):
 	
 	var current_pitch = $IdleSoundPlayer3D.current_pitch_scale
 	if $IdleSoundPlayer3D.is_engine_idling:
-		var tract_force_kN = _engine.tractive_force / 1000
-		var alpha = (max_pitch - min_pitch)/(max_tractive_force_allowed)
+		var tract_force_kN = _engine.tractive_effort / (1000 * 100)
+		var alpha = (max_pitch - min_pitch)/(max_tractive_effort_allowed)
 		var pitch = min_pitch * (1 + alpha * (tract_force_kN))
 		current_pitch += (pitch-current_pitch) * delta
 	$IdleSoundPlayer3D.current_pitch_scale = current_pitch

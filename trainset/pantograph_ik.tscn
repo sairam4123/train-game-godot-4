@@ -1,4 +1,4 @@
-[gd_scene load_steps=8 format=3 uid="uid://ciibepdjk5f85"]
+[gd_scene load_steps=11 format=3 uid="uid://ciibepdjk5f85"]
 
 [ext_resource type="Script" path="res://trainset/panto_test_skeleton.gd" id="1_2c72u"]
 
@@ -6,7 +6,7 @@
 size = Vector3(2.5, 0.125, 0.35)
 
 [sub_resource type="BoxMesh" id="BoxMesh_8f4q8"]
-size = Vector3(3, 0.125, 0.35)
+size = Vector3(3, 0.19, 0.35)
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_7ooj8"]
 radius = 0.125
@@ -24,61 +24,110 @@ height = 3.0
 radius = 0.125
 height = 3.0
 
+[sub_resource type="SphereMesh" id="SphereMesh_qh563"]
+radius = 0.18
+height = 0.36
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_ki3kc"]
+
+[sub_resource type="BoxMesh" id="BoxMesh_ucqln"]
+size = Vector3(1.5, 0.25, 5)
+
 [node name="pantograph_ik" type="Node3D"]
 
-[node name="Skeleton3D" type="SkeletonIK3D" parent="."]
+[node name="Skeleton3D" type="Skeleton3D" parent="."]
 process_priority = 1
-root_bone = &"lower"
-tip_bone = &"pad"
-target_node = NodePath("../Node3D")
+transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 0, 0, 0)
+bones/0/name = "lower"
+bones/0/parent = -1
+bones/0/rest = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0)
+bones/0/enabled = true
+bones/0/position = Vector3(0, 0, 0)
+bones/0/rotation = Quaternion(0, 0, 0, 1)
+bones/0/scale = Vector3(1, 1, 1)
+bones/1/name = "upper"
+bones/1/parent = -1
+bones/1/rest = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0)
+bones/1/enabled = true
+bones/1/position = Vector3(0, 0, 0)
+bones/1/rotation = Quaternion(0, 0, 0, 1)
+bones/1/scale = Vector3(1, 1, 1)
+bones/2/name = "pad"
+bones/2/parent = -1
+bones/2/rest = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0)
+bones/2/enabled = true
+bones/2/position = Vector3(0, 0, 0)
+bones/2/rotation = Quaternion(0, 0, 0, 1)
+bones/2/scale = Vector3(1, 1, 1)
 script = ExtResource("1_2c72u")
 
-[node name="pad" type="PhysicalBone3D" parent="Skeleton3D"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 4, 0)
+[node name="platform" type="PhysicalBone3D" parent="Skeleton3D"]
+
+[node name="lower" type="PhysicalBone3D" parent="Skeleton3D/platform"]
+transform = Transform3D(1, 0, 0, 0, 0.707107, 0.707107, 0, -0.707107, 0.707107, 0, 1, -2.14399)
+joint_type = 3
+joint_offset = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -2.22314, 0.808924)
+body_offset = Transform3D(1, 0, 0, 0, 0.707107, 0.707107, 0, -0.707107, 0.707107, 0, 1, -2.14399)
+bone_name = "lower"
+joint_constraints/angular_limit_enabled = false
+joint_constraints/angular_limit_upper = 90.0
+joint_constraints/angular_limit_lower = -90.0
+joint_constraints/angular_limit_bias = 0.3
+joint_constraints/angular_limit_softness = 0.9
+joint_constraints/angular_limit_relaxation = 1.0
+
+[node name="upper" type="PhysicalBone3D" parent="Skeleton3D/platform/lower"]
+transform = Transform3D(1, 0, 0, -1.42109e-14, 0, -1, 1.42109e-14, 1, 0, 0, 1.41421, 1.41421)
+joint_type = 3
+joint_offset = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.60529, 3.63735)
+body_offset = Transform3D(1, 0, 0, 0, 0.707107, -0.707107, 1.42109e-14, 0.707107, 0.707107, 0, 3, -2.14399)
+bone_name = "upper"
+joint_constraints/angular_limit_enabled = false
+joint_constraints/angular_limit_upper = 90.0
+joint_constraints/angular_limit_lower = -90.0
+joint_constraints/angular_limit_bias = 0.3
+joint_constraints/angular_limit_softness = 0.9
+joint_constraints/angular_limit_relaxation = 1.0
+
+[node name="pad" type="PhysicalBone3D" parent="Skeleton3D/platform/lower/upper"]
+transform = Transform3D(1, 0, 0, 0, 0.707107, 0.707107, 0, -0.707107, 0.707107, -5.76144e-10, 1.41422, -7.15256e-07)
 joint_type = 1
-joint_offset = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -4, 0)
-body_offset = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 4, 0)
+joint_offset = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5.76128e-10, -4.00001, 1.14399)
+body_offset = Transform3D(1, 0, 7.10543e-15, 0, 1, 0, 1.42109e-14, 0, 1, -5.76136e-10, 4.00001, -1.14399)
 bone_name = "pad"
 joint_constraints/bias = 0.3
 joint_constraints/damping = 1.0
 joint_constraints/impulse_clamp = 0.0
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Skeleton3D/pad"]
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Skeleton3D/platform/lower/upper/pad"]
 shape = SubResource("BoxShape3D_n4gf3")
 
-[node name="MeshInstance3D" type="MeshInstance3D" parent="Skeleton3D/pad"]
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Skeleton3D/platform/lower/upper/pad"]
 mesh = SubResource("BoxMesh_8f4q8")
 
-[node name="upper" type="PhysicalBone3D" parent="Skeleton3D"]
-transform = Transform3D(1, 0, 0, 0, 0.707107, -0.707107, 0, 0.707107, 0.707107, 0, 3, -1)
-joint_offset = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1.41421, 2.82843)
-body_offset = Transform3D(1, 0, 0, 0, 0.707107, -0.707107, 0, 0.707107, 0.707107, 0, 3, -1)
-bone_name = "upper"
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Skeleton3D/upper"]
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Skeleton3D/platform/lower/upper"]
 shape = SubResource("CapsuleShape3D_7ooj8")
 
-[node name="MeshInstance3D" type="MeshInstance3D" parent="Skeleton3D/upper"]
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Skeleton3D/platform/lower/upper"]
 mesh = SubResource("CapsuleMesh_5dvyv")
-skeleton = NodePath("../..")
+skeleton = NodePath("../../../..")
 
-[node name="lower" type="PhysicalBone3D" parent="Skeleton3D"]
-transform = Transform3D(1, 0, 0, 0, 0.707107, 0.707107, 0, -0.707107, 0.707107, 0, 1, -1)
-joint_type = 2
-body_offset = Transform3D(1, 0, 0, 0, 0.707107, 0.707107, 0, -0.707107, 0.707107, 0, 1, -1)
-bone_name = "lower"
-joint_constraints/swing_span = 45.0
-joint_constraints/twist_span = 180.0
-joint_constraints/bias = 0.3
-joint_constraints/softness = 0.8
-joint_constraints/relaxation = 1.0
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Skeleton3D/lower"]
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Skeleton3D/platform/lower"]
 shape = SubResource("CapsuleShape3D_y0moy")
 
-[node name="MeshInstance3D" type="MeshInstance3D" parent="Skeleton3D/lower"]
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Skeleton3D/platform/lower"]
 mesh = SubResource("CapsuleMesh_oy0c7")
-skeleton = NodePath("../..")
+skeleton = NodePath("../../..")
+
+[node name="MeshInstance3D2" type="MeshInstance3D" parent="Skeleton3D/platform/lower"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.35, 0.045)
+mesh = SubResource("SphereMesh_qh563")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Skeleton3D/platform"]
+shape = SubResource("BoxShape3D_ki3kc")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Skeleton3D/platform"]
+mesh = SubResource("BoxMesh_ucqln")
 
 [node name="Camera3D" type="Camera3D" parent="."]
 transform = Transform3D(-0.122702, 0.102953, 0.987089, 0, 0.994605, -0.103737, -0.992444, -0.0127288, -0.12204, 2.95841, 0.179759, -0.156235)

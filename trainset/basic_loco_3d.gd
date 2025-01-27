@@ -15,6 +15,14 @@ var throttle = 0
 var rev: int = 1
 var velocity = 0
 var brake = 0
+var is_looped = false
+var direction_of_motion = 1:  # Train forwards
+	get:
+		if is_zero_approx(velocity):
+			return 0
+		return (velocity/abs(velocity)) * (-1 if is_looped else 1)
+			#  ^^^^^^^^^^^^^^^^^^^^^^^^ --> sign func
+var train: Train3D
 
 @export var power_output = 10000.0
 @export var throttle_efficiency = 0.89
@@ -25,7 +33,7 @@ var brake = 0
 @export var frontal_area = 10
 @export var grade_texture: FastNoiseLite
 var total_force
-var tractive_force
+var tractive_effort = 0
 
 @export_range(0, 1, 0.0001) var offset = 0.0:
 	set(value):
@@ -82,6 +90,9 @@ func _ready():
 func _power_state_changed(power_state):
 	is_powered = power_state
 
+func set_train(_train: Train3D):
+	train = _train
+
 func power_state_changed(changed_value, power_mode):
 	match power_mode:
 		PowerMode.ignition:
@@ -114,17 +125,24 @@ func _physics_process(delta):
 	$EnginePhysics3D.rev = rev
 	$EnginePhysics3D.brake = brake
 	$EnginePhysics3D.is_powered = is_powered
-
 	
- #  + (
+	tractive_effort = $EnginePhysics3D.tractive_effort
+	velocity = $EnginePhysics3D.velocity
+	total_force = $EnginePhysics3D.total_force
+	progress += abs(velocity) * delta * direction_of_motion * (-1 if get_parent().reversed else 1)
+
+
+#  + (
 #		(offset-real_offset)
 #		)
 #	real_offset += (offset-real_offset)
-	
-#
-	
 
 # RES_CONST = -0.4257, 12.8
+
+@onready var camera_3d = %Camera3D
+
+func get_camera():
+	return camera_3d
 
 
 func _on_horn_sound_player_3d_honked_for(time):

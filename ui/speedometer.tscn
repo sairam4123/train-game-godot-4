@@ -1,0 +1,112 @@
+[gd_scene load_steps=6 format=3 uid="uid://matey1bi2sb2"]
+
+[ext_resource type="Script" path="res://ui/speedometer.gd" id="1_xaprn"]
+
+[sub_resource type="Gradient" id="Gradient_nwqgq"]
+offsets = PackedFloat32Array(0.546053, 0.565789)
+colors = PackedColorArray(0, 0, 0, 0.505882, 1, 1, 1, 0)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_dwlwg"]
+gradient = SubResource("Gradient_nwqgq")
+width = 300
+height = 300
+fill = 1
+fill_from = Vector2(0.5, 0.5)
+
+[sub_resource type="Gradient" id="Gradient_2qbjr"]
+offsets = PackedFloat32Array(0.535117, 0.568562, 0.598662, 0.608696)
+colors = PackedColorArray(0, 0, 0, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_3hy3u"]
+gradient = SubResource("Gradient_2qbjr")
+width = 300
+height = 300
+fill = 1
+fill_from = Vector2(0.5, 0.5)
+
+[node name="Speedometer" type="Control"]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 300.0
+offset_bottom = 300.0
+script = ExtResource("1_xaprn")
+distance_covered = 25
+
+[node name="TextureRect" type="TextureRect" parent="."]
+layout_mode = 0
+offset_right = 300.0
+offset_bottom = 300.0
+texture = SubResource("GradientTexture2D_dwlwg")
+
+[node name="TextureProgressBar" type="TextureProgressBar" parent="TextureRect"]
+layout_mode = 0
+offset_right = 300.0
+offset_bottom = 300.0
+max_value = 200.0
+step = 0.01
+value = 89.0
+fill_mode = 4
+radial_initial_angle = 225.0
+radial_fill_degrees = 270.0
+nine_patch_stretch = true
+texture_progress = SubResource("GradientTexture2D_3hy3u")
+
+[node name="Label" type="Label" parent="."]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -37.0
+offset_top = -62.0
+offset_right = 37.0
+offset_bottom = 26.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_font_sizes/font_size = 64
+text = "89"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Label2" type="Label" parent="."]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -23.5
+offset_top = 5.5
+offset_right = 23.5
+offset_bottom = 28.5
+grow_horizontal = 2
+grow_vertical = 2
+text = "KMPH"
+
+[node name="Label4" type="Label" parent="."]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -23.0
+offset_top = 62.0
+offset_right = 24.0
+offset_bottom = 79.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_font_sizes/font_size = 12
+text = "KM"
+horizontal_alignment = 1
+
+[node name="Label3" type="Label" parent="."]
+layout_mode = 0
+offset_left = 103.0
+offset_top = 185.0
+offset_right = 203.0
+offset_bottom = 219.0
+theme_override_font_sizes/font_size = 24
+text = "000025"
+horizontal_alignment = 1

@@ -13,7 +13,8 @@ theme_override_styles/grabber_area = SubResource("StyleBoxEmpty_fk2kg")
 theme_override_styles/grabber_area_highlight = SubResource("StyleBoxEmpty_lyc35")
 max_value = 1.0
 script = ExtResource("1_t8vju")
-default_value = 0.0
+detectable_zone = 0.05
 
 [connection signal="drag_ended" from="." to="." method="_on_drag_ended"]
 [connection signal="drag_started" from="." to="." method="_on_drag_started"]
+[connection signal="value_changed" from="." to="." method="_on_value_changed"]

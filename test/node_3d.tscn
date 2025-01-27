@@ -1,0 +1,101 @@
+[gd_scene load_steps=12 format=3 uid="uid://da0td2fsh2kmo"]
+
+[ext_resource type="Script" path="res://test/rotate_text.gd" id="1_x6a3w"]
+[ext_resource type="Shader" path="res://test/curve_text.gdshader" id="2_6gt68"]
+[ext_resource type="Script" path="res://test/curve_test.gd" id="3_0gjef"]
+[ext_resource type="Script" path="res://test/quadring_sys.gd" id="3_7evnx"]
+
+[sub_resource type="Gradient" id="Gradient_fqgs5"]
+interpolation_mode = 2
+offsets = PackedFloat32Array(0)
+colors = PackedColorArray(1, 1, 0, 1)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_6j62e"]
+gradient = SubResource("Gradient_fqgs5")
+width = 280
+height = 280
+fill = 1
+fill_from = Vector2(0.5, 0.5)
+fill_to = Vector2(1, 1)
+
+[sub_resource type="LabelSettings" id="LabelSettings_s36rj"]
+font_size = 32
+font_color = Color(0, 0, 0, 1)
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_dp2kb"]
+shader = ExtResource("2_6gt68")
+
+[sub_resource type="ViewportTexture" id="ViewportTexture_dcamv"]
+viewport_path = NodePath("SubViewport")
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_8flsg"]
+albedo_color = Color(1, 1, 0, 1)
+
+[sub_resource type="ArrayMesh" id="ArrayMesh_5wcu5"]
+_surfaces = [{
+"aabb": AABB(-0.5, 0, -0.5, 1.00001, 1e-05, 1),
+"format": 1,
+"primitive": 2,
+"vertex_count": 65,
+"vertex_data": PackedByteArray(0, 0, 0, 63, 0, 0, 0, 0, 0, 0, 0, 0, 109, 196, 254, 62, 0, 0, 0, 0, 54, 189, 72, 61, 190, 20, 251, 62, 0, 0, 0, 0, 194, 197, 199, 61, 11, 250, 244, 62, 0, 0, 0, 0, 49, 160, 20, 62, 94, 131, 236, 62, 0, 0, 0, 0, 21, 239, 67, 62, 152, 197, 225, 62, 0, 0, 0, 0, 234, 90, 113, 62, 49, 219, 212, 62, 0, 0, 0, 0, 218, 57, 142, 62, 3, 228, 197, 62, 0, 0, 0, 0, 153, 103, 162, 62, 243, 4, 181, 62, 0, 0, 0, 0, 243, 4, 181, 62, 153, 103, 162, 62, 0, 0, 0, 0, 3, 228, 197, 62, 218, 57, 142, 62, 0, 0, 0, 0, 49, 219, 212, 62, 234, 90, 113, 62, 0, 0, 0, 0, 152, 197, 225, 62, 21, 239, 67, 62, 0, 0, 0, 0, 94, 131, 236, 62, 49, 160, 20, 62, 0, 0, 0, 0, 11, 250, 244, 62, 194, 197, 199, 61, 0, 0, 0, 0, 190, 20, 251, 62, 54, 189, 72, 61, 0, 0, 0, 0, 109, 196, 254, 62, 0, 48, 13, 36, 0, 0, 0, 0, 0, 0, 0, 63, 54, 189, 72, 189, 0, 0, 0, 0, 109, 196, 254, 62, 194, 197, 199, 189, 0, 0, 0, 0, 190, 20, 251, 62, 49, 160, 20, 190, 0, 0, 0, 0, 11, 250, 244, 62, 21, 239, 67, 190, 0, 0, 0, 0, 94, 131, 236, 62, 234, 90, 113, 190, 0, 0, 0, 0, 152, 197, 225, 62, 218, 57, 142, 190, 0, 0, 0, 0, 49, 219, 212, 62, 153, 103, 162, 190, 0, 0, 0, 0, 3, 228, 197, 62, 243, 4, 181, 190, 0, 0, 0, 0, 243, 4, 181, 62, 3, 228, 197, 190, 0, 0, 0, 0, 153, 103, 162, 62, 49, 219, 212, 190, 0, 0, 0, 0, 218, 57, 142, 62, 152, 197, 225, 190, 0, 0, 0, 0, 234, 90, 113, 62, 94, 131, 236, 190, 0, 0, 0, 0, 21, 239, 67, 62, 11, 250, 244, 190, 0, 0, 0, 0, 49, 160, 20, 62, 190, 20, 251, 190, 0, 0, 0, 0, 194, 197, 199, 61, 109, 196, 254, 190, 0, 0, 0, 0, 54, 189, 72, 61, 0, 0, 0, 191, 0, 0, 0, 0, 0, 48, 141, 36, 109, 196, 254, 190, 0, 0, 0, 0, 54, 189, 72, 189, 190, 20, 251, 190, 0, 0, 0, 0, 194, 197, 199, 189, 11, 250, 244, 190, 0, 0, 0, 0, 49, 160, 20, 190, 94, 131, 236, 190, 0, 0, 0, 0, 21, 239, 67, 190, 152, 197, 225, 190, 0, 0, 0, 0, 234, 90, 113, 190, 49, 219, 212, 190, 0, 0, 0, 0, 218, 57, 142, 190, 3, 228, 197, 190, 0, 0, 0, 0, 153, 103, 162, 190, 243, 4, 181, 190, 0, 0, 0, 0, 243, 4, 181, 190, 153, 103, 162, 190, 0, 0, 0, 0, 3, 228, 197, 190, 218, 57, 142, 190, 0, 0, 0, 0, 49, 219, 212, 190, 234, 90, 113, 190, 0, 0, 0, 0, 152, 197, 225, 190, 21, 239, 67, 190, 0, 0, 0, 0, 94, 131, 236, 190, 49, 160, 20, 190, 0, 0, 0, 0, 11, 250, 244, 190, 194, 197, 199, 189, 0, 0, 0, 0, 190, 20, 251, 190, 54, 189, 72, 189, 0, 0, 0, 0, 109, 196, 254, 190, 0, 200, 211, 164, 0, 0, 0, 0, 0, 0, 0, 191, 54, 189, 72, 61, 0, 0, 0, 0, 109, 196, 254, 190, 194, 197, 199, 61, 0, 0, 0, 0, 190, 20, 251, 190, 49, 160, 20, 62, 0, 0, 0, 0, 11, 250, 244, 190, 21, 239, 67, 62, 0, 0, 0, 0, 94, 131, 236, 190, 234, 90, 113, 62, 0, 0, 0, 0, 152, 197, 225, 190, 218, 57, 142, 62, 0, 0, 0, 0, 49, 219, 212, 190, 153, 103, 162, 62, 0, 0, 0, 0, 3, 228, 197, 190, 243, 4, 181, 62, 0, 0, 0, 0, 243, 4, 181, 190, 3, 228, 197, 62, 0, 0, 0, 0, 153, 103, 162, 190, 49, 219, 212, 62, 0, 0, 0, 0, 218, 57, 142, 190, 152, 197, 225, 62, 0, 0, 0, 0, 234, 90, 113, 190, 94, 131, 236, 62, 0, 0, 0, 0, 21, 239, 67, 190, 11, 250, 244, 62, 0, 0, 0, 0, 49, 160, 20, 190, 190, 20, 251, 62, 0, 0, 0, 0, 194, 197, 199, 189, 109, 196, 254, 62, 0, 0, 0, 0, 54, 189, 72, 189, 0, 0, 0, 63, 0, 0, 0, 0, 0, 48, 13, 165)
+}]
+
+[node name="Node2D" type="Node2D"]
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+rotation = 0.785398
+texture = SubResource("GradientTexture2D_6j62e")
+
+[node name="Label" type="Label" parent="Sprite2D"]
+offset_left = -85.0
+offset_top = -24.0
+offset_right = 86.0
+offset_bottom = 24.0
+rotation = -0.785398
+pivot_offset = Vector2(85, 24)
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+text = "Tambaram"
+label_settings = SubResource("LabelSettings_s36rj")
+
+[node name="Control" type="Control" parent="Sprite2D"]
+layout_mode = 3
+anchors_preset = 0
+offset_left = -176.07
+offset_top = -85.56
+offset_right = 140.93
+offset_bottom = 42.44
+rotation = -0.785398
+pivot_offset = Vector2(158, 64)
+script = ExtResource("1_x6a3w")
+
+[node name="Sprite2D" type="Sprite2D" parent="Sprite2D"]
+material = SubResource("ShaderMaterial_dp2kb")
+rotation = -0.785398
+texture = SubResource("ViewportTexture_dcamv")
+
+[node name="SubViewport" type="SubViewport" parent="."]
+size = Vector2i(100, 30)
+
+[node name="Label" type="Label" parent="SubViewport"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+text = "Tambaram"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Node3D" type="Node3D" parent="."]
+script = ExtResource("3_0gjef")
+text = "XAMP"
+node = NodePath("Labels")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Node3D"]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, 0)
+material_override = SubResource("StandardMaterial3D_8flsg")
+mesh = SubResource("ArrayMesh_5wcu5")
+script = ExtResource("3_7evnx")
+radius = 0.5
+
+[node name="Labels" type="Node3D" parent="Node3D"]

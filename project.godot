@@ -12,18 +12,24 @@ config_version=5
 
 config/name="TrainSimTestProject"
 run/main_scene="res://test_train.tscn"
-config/features=PackedStringArray("4.0", "Forward Plus")
+config/features=PackedStringArray("4.3", "Forward Plus")
 config/icon="res://icon.svg"
 
 [autoload]
 
 UIAccessor="*res://ui_accessors.gd"
 DebugPrint="*res://debug_print.gd"
+InputManager="*res://addons/input_manager/InputManager.gd"
 
 [display]
 
-window/vsync/vsync_mode=0
 window/stretch/aspect="ignore"
+window/vsync/vsync_mode=0
+
+[input_devices]
+
+pointing/emulate_mouse_from_touch=false
+pointing/emulate_mouse_from_touch.mobile=true
 
 [layer_names]
 
@@ -31,3 +37,11 @@ window/stretch/aspect="ignore"
 3d_physics/layer_2="wagons"
 3d_physics/layer_3="coupler"
 3d_physics/layer_4="switch"
+
+[physics]
+
+common/physics_ticks_per_second=240
+
+[rendering]
+
+textures/vram_compression/import_etc2_astc=true

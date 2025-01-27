@@ -1,4 +1,4 @@
-[gd_resource type="AudioBusLayout" load_steps=8 format=3 uid="uid://c00hlvwqmtmvb"]
+[gd_resource type="AudioBusLayout" load_steps=11 format=3 uid="uid://c00hlvwqmtmvb"]
 
 [sub_resource type="AudioEffectDelay" id="AudioEffectDelay_etd4s"]
 resource_name = "Delay"
@@ -17,16 +17,30 @@ damping = 0.6
 [sub_resource type="AudioEffectDelay" id="AudioEffectDelay_t0juo"]
 resource_name = "Delay"
 
+[sub_resource type="AudioEffectNotchFilter" id="AudioEffectNotchFilter_n3r1v"]
+resource_name = "NotchFilter"
+gain = 0.5
+
 [sub_resource type="AudioEffectLowPassFilter" id="AudioEffectLowPassFilter_ytion"]
 resource_name = "LowPassFilter"
+cutoff_hz = 500.0
 
 [sub_resource type="AudioEffectPitchShift" id="AudioEffectPitchShift_h22no"]
 resource_name = "PitchShift"
-pitch_scale = 1.5
+pitch_scale = 1.25
+
+[sub_resource type="AudioEffectNotchFilter" id="AudioEffectNotchFilter_p5rxp"]
+resource_name = "NotchFilter"
+gain = 0.5
+
+[sub_resource type="AudioEffectLowPassFilter" id="AudioEffectLowPassFilter_puvgd"]
+resource_name = "LowPassFilter"
+cutoff_hz = 500.0
 
 [resource]
+bus/0/volume_db = -5.93075
 bus/0/effect/0/effect = SubResource("AudioEffectDelay_etd4s")
-bus/0/effect/0/enabled = false
+bus/0/effect/0/enabled = true
 bus/0/effect/1/effect = SubResource("AudioEffectReverb_bpb15")
 bus/0/effect/1/enabled = false
 bus/0/effect/2/effect = SubResource("AudioEffectEQ_iy3ea")
@@ -34,20 +48,32 @@ bus/0/effect/2/enabled = true
 bus/1/name = &"Station"
 bus/1/solo = false
 bus/1/mute = false
-bus/1/bypass_fx = false
-bus/1/volume_db = 0.0
-bus/1/send = &"Master"
+bus/1/bypass_fx = true
+bus/1/volume_db = 6.02
+bus/1/send = &"BellSound"
 bus/1/effect/0/effect = SubResource("AudioEffectReverb_8af2u")
 bus/1/effect/0/enabled = true
 bus/1/effect/1/effect = SubResource("AudioEffectDelay_t0juo")
-bus/1/effect/1/enabled = true
-bus/1/effect/2/effect = SubResource("AudioEffectLowPassFilter_ytion")
-bus/1/effect/2/enabled = true
+bus/1/effect/1/enabled = false
 bus/2/name = &"BellSound"
 bus/2/solo = false
 bus/2/mute = false
 bus/2/bypass_fx = false
-bus/2/volume_db = 0.0
-bus/2/send = &"BellSound 2"
-bus/2/effect/0/effect = SubResource("AudioEffectPitchShift_h22no")
+bus/2/volume_db = 6.02
+bus/2/send = &"Master"
+bus/2/effect/0/effect = SubResource("AudioEffectNotchFilter_n3r1v")
 bus/2/effect/0/enabled = true
+bus/2/effect/1/effect = SubResource("AudioEffectLowPassFilter_ytion")
+bus/2/effect/1/enabled = true
+bus/2/effect/2/effect = SubResource("AudioEffectPitchShift_h22no")
+bus/2/effect/2/enabled = true
+bus/3/name = &"HornSound"
+bus/3/solo = false
+bus/3/mute = false
+bus/3/bypass_fx = false
+bus/3/volume_db = 0.0
+bus/3/send = &"Master"
+bus/3/effect/0/effect = SubResource("AudioEffectNotchFilter_p5rxp")
+bus/3/effect/0/enabled = true
+bus/3/effect/1/effect = SubResource("AudioEffectLowPassFilter_puvgd")
+bus/3/effect/1/enabled = true
